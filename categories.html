@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop By Categories</title>
+</head>
+<style>
+    /*categories*/
+.navbar{
+    background:#000;
+    padding:0;
+}
+
+.dropdown{
+    position:relative;
+    display:inline-block;
+}
+
+.dropbtn{
+    color:white;
+    text-decoration:none;
+    padding:18px 25px;
+    display:block;
+    font-weight:bold;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    width:320px;
+    background:#fff;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    z-index:1000;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+.category{
+    position:relative;
+}
+
+.category > a{
+    display:block;
+    padding:15px 20px;
+    color:#000;
+    text-decoration:none;
+    border-bottom:1px solid #eee;
+}
+
+.category > a:hover{
+    background:#f5f5f5;
+}
+
+.submenu{
+    display:none;
+    position:absolute;
+    top:0;
+    left:100%;
+    width:250px;
+    background:#fff;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.category:hover .submenu{
+    display:block;
+}
+
+.submenu a{
+    display:block;
+    padding:12px 18px;
+    text-decoration:none;
+    color:#333;
+    border-bottom:1px solid #eee;
+}
+
+.submenu a:hover{
+    background:#007bff;
+    color:white;
+}
+</style>
+<body>
+    <h1>Shop By Categories</h1>
+    <nav class="navbar">
+
+    <div class="dropdown">
+
+        <a href="categories.html" class="dropbtn">
+            ☰ SHOP BY CATEGORIES
+        </a>
+
+        <div class="dropdown-content">
+
+            <div class="category">
+                <a href="medicines.html">💊 Medicines</a>
+
+                <div class="submenu">
+                    <a href="#">Prescription Medicines</a>
+                    <a href="#">Pain Relief</a>
+                    <a href="#">Antibiotics</a>
+                    <a href="#">Diabetes Care</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="otc.html">💊 Over-the-Counter</a>
+
+                <div class="submenu">
+                    <a href="#">Cold & Flu</a>
+                    <a href="#">Allergy Relief</a>
+                    <a href="#">Digestive Health</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="vitamins.html">🧴 Vitamins & Supplements</a>
+
+                <div class="submenu">
+                    <a href="#">Multivitamins</a>
+                    <a href="#">Vitamin C</a>
+                    <a href="#">Calcium</a>
+                    <a href="#">Iron Supplements</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="health-food.html">🥤 Health Food & Drinks</a>
+
+                <div class="submenu">
+                    <a href="#">Protein Drinks</a>
+                    <a href="#">Healthy Snacks</a>
+                    <a href="#">Herbal Teas</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="medical-devices.html">🩺 Medical Devices</a>
+
+                <div class="submenu">
+                    <a href="#">Blood Pressure Monitors</a>
+                    <a href="#">Thermometers</a>
+                    <a href="#">Glucometers</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="personal-care.html">🧴 Personal Care</a>
+
+                <div class="submenu">
+                    <a href="#">Skin Care</a>
+                    <a href="#">Hair Care</a>
+                    <a href="#">Oral Care</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="mens-health.html">👨 Men's Health</a>
+
+                <div class="submenu">
+                    <a href="#">Hair Loss</a>
+                    <a href="#">Performance</a>
+                    <a href="#">Wellness</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="weight-loss.html">⚖️ Weight Loss</a>
+
+                <div class="submenu">
+                    <a href="#">Meal Replacements</a>
+                    <a href="#">Weight Management</a>
+                    <a href="#">Fitness Support</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+    <a href="index.html">← Back Home</a>
+</body>
+</html>

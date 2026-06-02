@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+    content="Medical Assistance App helps users find doctors, hospitals, pharmacies, online consultations and medicine delivery services.">
+    <meta name="keywords"
+    content="doctor consultation, pharmacy, medicine delivery, hospitals, healthcare"/>
+    <title>Medical Assistance App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <h1>Medical Assistance App</h1>
+        <p>Find nearby doctors, hospitals and pharmacies</p>
+    </header>
+    <!-- TOP NAVIGATION -->
+<section class="top-navbar">
+    <div class="logo-section">
+        <img src="images/w3cert.gif" alt="Medical Assistance Logo" class="logo">
+        <div class="contact-info">
+            <p><strong>WhatsApp Us</strong></p>
+            <p>+256 704068587</p>
+        </div>
+    </div>
+    <!-- SEARCH BAR -->
+    <div class="search-container">
+        <select>
+            <option>All Categories</option>
+            <option>Doctors</option>
+            <option>Hospitals</option>
+            <option>Pharmacy</option>
+            <option>Medicines</option>
+        </select>
+        <label for="search" class="sr-only">
+</label>
+
+<input
+    id="search"
+    type="search"
+    placeholder="Search for doctors, medicines..."
+>
+        <button>
+            🔍
+        </button>
+    </div>
+    <!-- USER SECTION -->
+    <div class="user-section">
+        <a href="#">Signin/Signup</a>
+        <a href="#">🛒 Cart</a>
+    </div>
+</section>
+<!-- MENU -->
+<section class="menu-bar">
+   <nav>
+    <a href="categories.html">☰ Shop By Categories</a>
+    <a href="online-pharmacy.html">Online Pharmacy</a>
+    <a href="doctor-consultation.html">Doctor Consultation</a>
+    <a href="mens-health.html">Men's Health</a>
+    <a href="weight-loss.html">Weight Loss</a>
+    <a href="birth-control-pills.html">Birth Control Pills</a>
+    <a href="morning-after-pills.html">Morning After Pills</a>
+</nav>
+</section>
+    <!-- HERO SECTION -->
+<section class="hero-section">
+    <!-- LEFT CONTENT -->
+    <div class="hero-content">
+        <h1>
+            Bring Back Your Energy & Confidence
+        </h1>
+        <p>
+            Speak to certified doctors online anytime, anywhere.
+            Get prescriptions, consultations, and healthcare support instantly.
+        </p>
+        <button type="button">
+            Explore Services
+        </button>
+    </div>
+    <!-- ANIMATED IMAGE -->
+    <div class="hero-image">
+
+    <img src="images/center.png" class="slide active" alt="Healthcare">
+    <img src="images/ug.jpg" class="slide" alt="Doctor Consultation">
+    <img src="images/Uganda.jpg" class="slide" alt="Hospital Services">
+    <img src="images/updfmedical.jpeg" class="slide" alt="Pharmacy Services">
+
+</div>
+</section>
+<!-- ONLINE CONSULTATION SECTION -->
+<section class="consultation-section">
+    <div class="consultation-container">
+    <div class="consultation-box">
+        <h1>
+            Speak to a Certified Doctor Online — Anytime, Anywhere
+        </h1>
+        <p class="consultation-text">
+            Get medical advice, prescriptions, or referrals
+            within minutes from trusted doctors.
+        </p>
+        <ul>
+            <li>Real-time video or call consultations</li>
+            <li>Covered for chronic & general health needs</li>
+            <li>Prescription delivery available</li>
+            <li>Multilingual certified doctors</li>
+        </ul>
+        <button>
+            START CONSULTATION NOW
+        </button>
+       </div> 
+         <div class="consultation-image">
+            <img src="images/doctor.webp"
+                 alt="Online Doctor Consultation">
+        </div>
+    </div>
+</section>
+<!-- FEATURE CARDS -->
+<section class="features">
+    <div class="feature-card">
+        <h2>Online Doctor Consultation</h2>
+        <p>
+            Talk to certified doctors anytime, anywhere.
+        </p>
+        <button>Consult Now</button>
+    </div>
+    <div class="feature-card">
+        <h2>Online Prescription & Medicine Delivery</h2>
+        <p>
+            Get medicines delivered directly to your home.
+        </p>
+        <button>Order Medicine</button>
+    </div>
+</section>
+    <!-- SEARCH SECTION -->
+    <section class="search-section">
+        <h2>Search Nearby Medical Services</h2>
+        <button onclick="getLocation()">
+            Find Doctors Near Me
+        </button>
+
+        <div class="more-info">
+            <p>
+                Use this app to:
+            </p>
+
+            <ul>
+                <li>Find nearby hospitals</li>
+                <li>Book doctor appointments</li>
+                <li>Check consultation prices</li>
+                <li>Connect with online doctors</li>
+                <li>View latest medical trends</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+
+        <h2>Medical Services</h2>
+
+        <div class="service-card">
+            <h3>Online Consultation</h3>
+            <p>Talk to certified doctors online anytime.</p>
+            <a href="https://www.doctoroncall.com.my/" target="_blank" rel="noopener noreferrer">
+                Connect Now
+            </a>
+            
+        </div>
+
+        <div class="service-card">
+            <h3>Doctor Specialisation</h3>
+            <p>Search specialists including dentists, surgeons, and pediatricians.</p>
+            <a href="#doctor-list">
+                View Specialists
+            </a>
+        </div>
+
+        <div class="service-card">
+            <h3>Latest Pharmaceuticals</h3>
+            <p>Learn about new medicines and health products.</p>
+            <a href="https://www.webmd.com/drugs/2/index" target="_blank">
+                Learn More
+            </a>
+        </div>
+
+        <div class="service-card" id="hospitals">
+            <h3>Hospitals & Clinics</h3>
+            <p>Locate nearby hospitals and medical facilities.</p>
+            <a href="https://www.google.com/maps/search/hospitals+near+me/"
+               target="_blank">
+               Find Hospitals
+            </a>
+        </div>
+
+        <div class="service-card">
+            <h3>Health Trends</h3>
+            <p>Stay updated with modern healthcare trends.</p>
+            <a href="https://www.who.int/news-room" target="_blank">
+                Read News
+            </a>
+        </div>
+
+        <div class="service-card">
+            <h3>Subscription Plans</h3>
+            <p>Subscribe for premium health consultation services.</p>
+            <a href="#">
+                Subscribe Now
+            </a>
+        </div>
+
+    </section>
+
+    <!-- DOCTOR LIST -->
+    <section id="doctors">
+
+        <h2>Available Doctors</h2>
+
+        <div id="doctor-list">
+
+    <div class="doctor-card">
+        <img src="images/awad.jpg" alt="Dr Sarah Johnson">
+
+        <h3>Dr. Sarah Johnson</h3>
+        <p>Cardiologist</p>
+        <p>Consultation Fee: $40</p>
+        <a href="#">Book Appointment</a>
+    </div>
+    <div class="doctor-card">
+        <img src="images/Dr.-Irene-Nakalema.jpg" alt="Dr Michael Brown">
+        <h3>Dr. Michael Brown</h3>
+        <p>Dentist</p>
+        <p>Consultation Fee: $25</p>
+        <a href="#">Book Appointment</a>
+    </div>
+</div>
+    </section>
+    <section class="reviews-section">
+
+    <h2>What Our Patients Say</h2>
+
+    <div class="reviews-container">
+
+        <div class="reviews-track">
+
+            <div class="review-card">
+                <p>
+                    "Excellent service! I consulted a doctor online and received my prescription within minutes."
+                </p>
+                <h4>- Sarah K.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "The medicine delivery was fast and reliable. Highly recommended."
+                </p>
+                <h4>- John M.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "Finding nearby specialists has never been easier."
+                </p>
+                <h4>- Grace N.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "Professional doctors and affordable consultation fees."
+                </p>
+                <h4>- David O.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "Very helpful platform for managing family healthcare."
+                </p>
+                <h4>- Rebecca A.</h4>
+            </div>
+
+            <!-- Duplicate for smooth infinite scrolling -->
+
+            <div class="review-card">
+                <p>
+                    "Excellent service! I consulted a doctor online and received my prescription within minutes."
+                </p>
+                <h4>- Sarah K.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "The medicine delivery was fast and reliable. Highly recommended."
+                </p>
+                <h4>- John M.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "Finding nearby specialists has never been easier."
+                </p>
+                <h4>- Grace N.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "Professional doctors and affordable consultation fees."
+                </p>
+                <h4>- David O.</h4>
+            </div>
+
+            <div class="review-card">
+                <p>
+                    "Very helpful platform for managing family healthcare."
+                </p>
+                <h4>- Rebecca A.</h4>
+            </div>
+            <div class="review-card">
+
+    <img src="doctor.webp" alt="Patient">
+
+    <p>
+        "Excellent service! I consulted a doctor online and received my prescription within minutes."
+    </p>
+
+    <h4>Sarah K.</h4>
+
+</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-info">
+        <p>📧 Email: support@medicalassist.com</p>
+        <p>📞 Phone: +256 700 000000</p>
+       <div class="contact-info">
+    <p>📞 Phone: +256 700 000000</p>
+    <p>📍 Location: <span id="location">Detecting location...</span></p>
+</div>
+        <p>🕒 Working Hours: Mon - Sun, 24hrs</p>
+    </div>
+
+    <form class="contact-form">
+
+        <input
+            type="text"
+            placeholder="Full Name"
+            required
+        >
+
+        <input
+            type="email"
+            placeholder="Email Address"
+            required
+        >
+
+        <input
+            type="tel"
+            placeholder="Phone Number"
+        >
+
+        <select required>
+            <option value="">Select Inquiry Type</option>
+            <option>General Inquiry</option>
+            <option>Appointment Booking</option>
+            <option>Medical Consultation</option>
+            <option>Feedback</option>
+        </select>
+
+        <textarea
+            placeholder="Write your message here..."
+            rows="6"
+            required
+        ></textarea>
+
+        <button type="submit">
+            Send Message
+        </button>
+
+    </form>
+
+</section>
+
+    </section>
+    <section class="medicine-search-section">
+
+    <h2>Browse More Trusted Medicines</h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="Search for products..."
+        >
+
+        <button type="submit">
+            🔍
+        </button>
+
+    </div>
+
+    <div class="medicine-categories">
+
+        <a href="#">Men's Health</a>
+        <span>|</span>
+
+        <a href="#">Women's Health</a>
+        <span>|</span>
+
+        <a href="#">Blood Pressure Control Medications</a>
+        <span>|</span>
+
+        <a href="#">Glucose Control Medications</a>
+        <span>|</span>
+
+        <a href="#">Sexual Wellness</a>
+        <span>|</span>
+
+        <a href="#">Family Planning Medications</a>
+        <span>|</span>
+
+        <a href="#">Cholesterol Management Medications</a>
+        <span>|</span>
+
+        <a href="#">Pain Relief Medication</a>
+        <span>|</span>
+
+        <a href="#">Weight Loss Medications</a>
+        <span>|</span>
+
+        <a href="#">Vitamins & Supplements</a>
+        <span>|</span>
+
+        <a href="#">Same Day Delivery</a>
+
+    </div>
+
+</section>
+    <!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="footer-about">
+
+            <img src="images/w3cert.gif" alt="Medical Assistance Logo">
+            <p>
+                Medical Assistance App is your all-in-one digital healthcare
+                platform offering online doctor consultations, pharmacy
+                services, prescriptions, vaccinations, and expert medical
+                support anytime, anywhere.
+            </p>
+
+            <div class="social-icons">
+    <a href="https://facebook.com" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+    </a>
+
+    <a href="https://instagram.com" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+
+    <a href="https://tiktok.com" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+    </a>
+
+    <a href="https://youtube.com" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+    </a>
+</div>
+
+        </div>
+
+        <!-- COMPANY LINKS -->
+
+        <div class="footer-links">
+
+            <h3>Medical Assistance</h3>
+
+            <a href="#">About Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">FAQ</a>
+
+        </div>
+
+        <!-- PHARMACY LINKS -->
+
+        <div class="footer-links">
+
+            <h3>ONLINE PHARMACY</h3>
+
+            <a href="#">Prescription Medicine</a>
+            <a href="#">OTC Medicine</a>
+            <a href="#">Vitamins & Supplements</a>
+            <a href="#">Personal Care</a>
+            <a href="#">Medical Devices</a>
+
+        </div>
+
+        <!-- ACCOUNT LINKS -->
+
+        <div class="footer-links">
+
+            <h3>ACCOUNT</h3>
+
+            <a href="#">Cart</a>
+            <a href="#">My Consultations</a>
+            <a href="#">My Account</a>
+            <a href="#">My Orders</a>
+            <a href="#">Wishlist</a>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <div class="bottom-card">
+
+            <h3>📞 Need Help?</h3>
+
+            <p>Didn't find what you were looking for?</p>
+
+            <a href="#">CONTACT US HERE</a>
+
+        </div>
+
+        <div class="bottom-card">
+
+    <img 
+        src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png"
+        alt="Feedback"
+        class="card-image"
+    >
+
+    <h3>💬 Feedback</h3>
+
+    <p>We'd love to hear what you think!</p>
+
+    <a href="#">Share Feedback</a>
+
+</div>
+
+        <div class="bottom-card">
+
+    <h3>📱 Download App</h3>
+
+    <p>Get special discounts on your first purchase.</p>
+
+    <a href="#" class="playstore-link">
+        <img  src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+            alt="Get it on Google Play"
+            class="playstore-badge"
+        >
+    </a>
+     <a href="#" class="playstore-link">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+             alt="Download on the App Store">
+    </a>
+    </div>
+</div>
+
+        
+
+    </div>
+
+</footer>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Medical Assistance App | All Rights Reserved</p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
