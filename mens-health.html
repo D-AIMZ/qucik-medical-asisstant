@@ -1,12 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Men's Health</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Health Hub</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0d6efd;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 0;
+        }
+
+        .hero {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #0d6efd;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 20px;
+            width: 220px;
+            margin: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .stat-box h2 {
+            color: #0d6efd;
+            margin: 0;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #0b5ed7;
+        }
+    </style>
 </head>
 <body>
-    <h1>Men's Health</h1>
-    <p>Products and services focused on men's wellness and healthcare.</p>
 
-    <a href="index.html">← Back Home</a>
+<header>
+    <h1>Men's Health Hub</h1>
+    <p>Empowering men to live healthier, stronger, and longer lives.</p>
+</header>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>Your Health Matters</h2>
+        <p>
+            Men's health extends beyond fitness. It includes heart health,
+            mental well-being, nutrition, preventive screenings, healthy aging,
+            and lifestyle choices that support long-term wellness.
+        </p>
+
+        <a href="#services" class="btn">Explore Services</a>
+    </section>
+
+    <section class="stats">
+        <div class="stat-box">
+            <h2>30+</h2>
+            <p>Health Resources</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>100%</h2>
+            <p>Wellness Focused</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>24/7</h2>
+            <p>Health Information Access</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Key Health Areas</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>❤️ Heart Health</h3>
+                <p>
+                    Learn about blood pressure, cholesterol management,
+                    cardiovascular fitness, and reducing heart disease risk.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🏋️ Physical Fitness</h3>
+                <p>
+                    Strength training, endurance exercises, flexibility,
+                    recovery strategies, and fitness planning.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🥗 Nutrition</h3>
+                <p>
+                    Healthy eating plans, weight management, hydration,
+                    and nutrient-rich food choices.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🧠 Mental Wellness</h3>
+                <p>
+                    Stress management, emotional well-being, resilience,
+                    and mental health awareness.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🔬 Preventive Care</h3>
+                <p>
+                    Regular screenings, health assessments, vaccinations,
+                    and early detection strategies.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>👨 Healthy Aging</h3>
+                <p>
+                    Guidance for maintaining mobility, energy levels,
+                    cognitive health, and quality of life as you age.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="hero" style="margin-top:30px;">
+        <h2>Healthy Lifestyle Checklist</h2>
+
+        <ul>
+            <li>Exercise regularly (150+ minutes weekly)</li>
+            <li>Eat balanced meals rich in vegetables and protein</li>
+            <li>Sleep 7–9 hours each night</li>
+            <li>Manage stress effectively</li>
+            <li>Stay hydrated throughout the day</li>
+            <li>Schedule annual health checkups</li>
+        </ul>
+    </section>
+
+    <a href="index.html" class="btn">← Back Home</a>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Men's Health Hub. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>
