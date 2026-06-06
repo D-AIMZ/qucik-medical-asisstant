@@ -1,12 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Pharmacy</title>
-</head>
-<body>
-    <h1>Online Pharmacy</h1>
-    <p>Order healthcare products and medications online.</p>
 
-    <a href="index.html">← Back Home</a>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:#f4f7fb;
+            color:#333;
+            line-height:1.6;
+        }
+
+        header{
+            background:linear-gradient(135deg,#0d6efd,#00b4d8);
+            color:white;
+            text-align:center;
+            padding:70px 20px;
+        }
+
+        header h1{
+            font-size:3rem;
+            margin-bottom:10px;
+        }
+
+        header p{
+            font-size:1.2rem;
+            max-width:700px;
+            margin:auto;
+        }
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+            padding:40px 0;
+        }
+
+        .hero{
+            background:white;
+            padding:35px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom:30px;
+        }
+
+        .hero h2{
+            color:#0d6efd;
+            margin-bottom:15px;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card h3{
+            color:#0d6efd;
+            margin-bottom:10px;
+        }
+
+        .stats{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
+            margin:40px 0;
+        }
+
+        .stat{
+            background:white;
+            padding:25px;
+            width:220px;
+            text-align:center;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .stat h2{
+            color:#0d6efd;
+            margin-bottom:8px;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#0d6efd;
+            color:white;
+            text-decoration:none;
+            padding:12px 25px;
+            border-radius:8px;
+            margin-top:20px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#084fc7;
+        }
+
+        footer{
+            background:#1d1d1d;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>💊 Online Pharmacy</h1>
+    <p>
+        Safe, convenient, and reliable access to healthcare products,
+        wellness essentials, and pharmacy services from the comfort of your home.
+    </p>
+</header>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>Your Trusted Healthcare Partner</h2>
+        <p>
+            Our online pharmacy provides a seamless experience for accessing
+            health information, wellness products, personal care essentials,
+            and professional healthcare support. We are committed to making
+            healthcare more accessible and convenient for everyone.
+        </p>
+    </section>
+
+    <section>
+        <h2 style="margin-bottom:20px;">Our Services</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>💊 Prescription Services</h3>
+                <p>
+                    Secure prescription management and medication support
+                    through licensed healthcare professionals.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🩺 Health Consultations</h3>
+                <p>
+                    Access professional healthcare guidance and wellness
+                    information to support your health goals.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🌿 Wellness Products</h3>
+                <p>
+                    Explore vitamins, supplements, personal care items,
+                    and everyday wellness essentials.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🚚 Fast Delivery</h3>
+                <p>
+                    Convenient delivery options designed to bring healthcare
+                    products directly to your doorstep.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h2>24/7</h2>
+            <p>Online Access</p>
+        </div>
+
+        <div class="stat">
+            <h2>100%</h2>
+            <p>Secure Ordering</p>
+        </div>
+
+        <div class="stat">
+            <h2>Fast</h2>
+            <p>Reliable Delivery</p>
+        </div>
+
+    </div>
+
+    <section class="hero">
+        <h2>Why Choose Us?</h2>
+
+        <ul style="padding-left:20px;">
+            <li>Licensed and trusted healthcare support.</li>
+            <li>Secure and privacy-focused platform.</li>
+            <li>User-friendly online experience.</li>
+            <li>Wide selection of health and wellness products.</li>
+            <li>Convenient ordering and delivery services.</li>
+        </ul>
+
+        <a href="#" class="btn">Browse Products</a>
+    </section>
+
+    <a href="index.html" class="btn">← Back Home</a>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Online Pharmacy. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>
