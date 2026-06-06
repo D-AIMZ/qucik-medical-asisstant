@@ -1,12 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Birth Control Pills</title>
-</head>
-<body>
-    <h1>Birth Control Pills</h1>
-    <p>Learn about contraceptive options and consult a healthcare professional for advice.</p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birth Control & Family Planning</title>
 
-    <a href="index.html">← Back Home</a>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:#f8f9fc;
+            color:#333;
+            line-height:1.6;
+        }
+
+        header{
+            background:linear-gradient(135deg,#ec4899,#d946ef);
+            color:white;
+            text-align:center;
+            padding:80px 20px;
+        }
+
+        header h1{
+            font-size:3rem;
+            margin-bottom:10px;
+        }
+
+        header p{
+            max-width:700px;
+            margin:auto;
+            font-size:1.1rem;
+        }
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+            padding:40px 0;
+        }
+
+        .section{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            margin-bottom:25px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .section h2{
+            color:#d946ef;
+            margin-bottom:15px;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card h3{
+            color:#d946ef;
+            margin-bottom:10px;
+        }
+
+        .highlight{
+            background:#fdf2f8;
+            border-left:5px solid #d946ef;
+            padding:20px;
+            border-radius:10px;
+            margin-top:15px;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#d946ef;
+            color:white;
+            text-decoration:none;
+            padding:12px 25px;
+            border-radius:8px;
+            margin-top:20px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#c026d3;
+        }
+
+        footer{
+            background:#222;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌸 Birth Control & Family Planning</h1>
+    <p>
+        Reliable information about contraceptive options, reproductive health,
+        and family planning to help individuals make informed healthcare decisions.
+    </p>
+</header>
+
+<div class="container">
+
+    <section class="section">
+        <h2>Understanding Birth Control</h2>
+        <p>
+            Birth control methods help prevent pregnancy and support family
+            planning goals. Different options may be suitable depending on
+            individual health needs, lifestyle, and personal preferences.
+        </p>
+
+        <div class="highlight">
+            <strong>Important:</strong> Always consult a qualified healthcare
+            professional before starting, changing, or stopping any contraceptive method.
+        </div>
+    </section>
+
+    <section>
+        <h2 style="margin-bottom:20px;">Contraceptive Options</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>💊 Oral Contraceptive Pills</h3>
+                <p>
+                    Daily medications used to help prevent pregnancy when
+                    taken as directed by a healthcare professional.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🩺 Professional Consultation</h3>
+                <p>
+                    Healthcare providers can help determine which option may
+                    be most appropriate for your individual circumstances.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>📅 Family Planning</h3>
+                <p>
+                    Learn about planning pregnancies, reproductive health,
+                    and long-term family planning strategies.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🔒 Reproductive Health Education</h3>
+                <p>
+                    Access educational resources that support informed
+                    decision-making and healthy reproductive choices.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>Who should speak with a healthcare professional?</h3>
+        <p>
+            Anyone considering contraception, experiencing side effects,
+            or seeking personalized family planning advice should consult
+            a qualified healthcare provider.
+        </p>
+
+        <br>
+
+        <h3>Are all contraceptive methods suitable for everyone?</h3>
+        <p>
+            No. Health history, medications, age, and other factors may
+            influence which options are appropriate.
+        </p>
+
+        <br>
+
+        <h3>Why is professional guidance important?</h3>
+        <p>
+            Healthcare professionals can provide personalized recommendations,
+            discuss benefits and risks, and answer questions about reproductive health.
+        </p>
+
+        <a href="#" class="btn">Schedule a Consultation</a>
+    </section>
+
+    <a href="index.html" class="btn">← Back Home</a>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Family Planning & Reproductive Health Services. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>
