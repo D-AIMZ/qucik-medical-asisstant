@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Shop By Categories</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop By Categories</title>
+
 <style>
-    /*categories*/
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:#f5f7fb;
+}
+
+/* NAVBAR */
 .navbar{
-    background:#000;
+    background:#0d6efd;
     padding:0;
 }
 
+/* MAIN BUTTON */
 .dropdown{
     position:relative;
     display:inline-block;
@@ -20,17 +29,21 @@
     text-decoration:none;
     padding:18px 25px;
     display:block;
-    font-weight:bold;
+    font-weight:600;
+    font-size:16px;
 }
 
+/* DROPDOWN PANEL */
 .dropdown-content{
     display:none;
     position:absolute;
     top:100%;
     left:0;
-    width:320px;
+    width:340px;
     background:#fff;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    border-radius:10px;
+    overflow:hidden;
     z-index:1000;
 }
 
@@ -38,30 +51,38 @@
     display:block;
 }
 
+/* CATEGORY */
 .category{
     position:relative;
 }
 
 .category > a{
-    display:block;
-    padding:15px 20px;
-    color:#000;
+    display:flex;
+    justify-content:space-between;
+    padding:14px 18px;
+    color:#333;
     text-decoration:none;
     border-bottom:1px solid #eee;
+    transition:0.2s;
+    font-weight:500;
 }
 
 .category > a:hover{
-    background:#f5f5f5;
+    background:#f0f6ff;
+    color:#0d6efd;
 }
 
+/* SUBMENU */
 .submenu{
     display:none;
     position:absolute;
     top:0;
     left:100%;
-    width:250px;
+    width:260px;
     background:#fff;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    border-radius:10px;
+    overflow:hidden;
 }
 
 .category:hover .submenu{
@@ -70,117 +91,135 @@
 
 .submenu a{
     display:block;
-    padding:12px 18px;
+    padding:12px 16px;
     text-decoration:none;
-    color:#333;
-    border-bottom:1px solid #eee;
+    color:#444;
+    border-bottom:1px solid #f1f1f1;
+    transition:0.2s;
 }
 
 .submenu a:hover{
-    background:#007bff;
+    background:#0d6efd;
     color:white;
 }
+
+/* HEADER */
+h1{
+    text-align:center;
+    margin:30px 0;
+    color:#222;
+}
+
+/* BACK BUTTON */
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:10px 16px;
+    background:#222;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.back:hover{
+    background:#000;
+}
 </style>
+</head>
+
 <body>
-    <h1>Shop By Categories</h1>
-    <nav class="navbar">
 
-    <div class="dropdown">
+<h1>Shop By Categories</h1>
 
-        <a href="categories.html" class="dropbtn">
-            ☰ SHOP BY CATEGORIES
-        </a>
+<nav class="navbar">
 
-        <div class="dropdown-content">
+<div class="dropdown">
 
-            <div class="category">
-                <a href="medicines.html">💊 Medicines</a>
+    <a href="#" class="dropbtn">☰ SHOP BY CATEGORIES</a>
 
-                <div class="submenu">
-                    <a href="#">Prescription Medicines</a>
-                    <a href="#">Pain Relief</a>
-                    <a href="#">Antibiotics</a>
-                    <a href="#">Diabetes Care</a>
-                </div>
+    <div class="dropdown-content">
+
+        <div class="category">
+            <a href="medicines.html">💊 Medicines</a>
+            <div class="submenu">
+                <a href="#">Prescription Medicines</a>
+                <a href="#">Pain Relief</a>
+                <a href="#">Antibiotics</a>
+                <a href="#">Diabetes Care</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="otc.html">💊 Over-the-Counter</a>
-
-                <div class="submenu">
-                    <a href="#">Cold & Flu</a>
-                    <a href="#">Allergy Relief</a>
-                    <a href="#">Digestive Health</a>
-                </div>
+        <div class="category">
+            <a href="otc.html">💊 Over-the-Counter</a>
+            <div class="submenu">
+                <a href="#">Cold & Flu</a>
+                <a href="#">Allergy Relief</a>
+                <a href="#">Digestive Health</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="vitamins.html">🧴 Vitamins & Supplements</a>
-
-                <div class="submenu">
-                    <a href="#">Multivitamins</a>
-                    <a href="#">Vitamin C</a>
-                    <a href="#">Calcium</a>
-                    <a href="#">Iron Supplements</a>
-                </div>
+        <div class="category">
+            <a href="vitamins.html">🧴 Vitamins & Supplements</a>
+            <div class="submenu">
+                <a href="#">Multivitamins</a>
+                <a href="#">Vitamin C</a>
+                <a href="#">Calcium</a>
+                <a href="#">Iron</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="health-food.html">🥤 Health Food & Drinks</a>
-
-                <div class="submenu">
-                    <a href="#">Protein Drinks</a>
-                    <a href="#">Healthy Snacks</a>
-                    <a href="#">Herbal Teas</a>
-                </div>
+        <div class="category">
+            <a href="health-food.html">🥤 Health Food & Drinks</a>
+            <div class="submenu">
+                <a href="#">Protein Drinks</a>
+                <a href="#">Healthy Snacks</a>
+                <a href="#">Herbal Teas</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="medical-devices.html">🩺 Medical Devices</a>
-
-                <div class="submenu">
-                    <a href="#">Blood Pressure Monitors</a>
-                    <a href="#">Thermometers</a>
-                    <a href="#">Glucometers</a>
-                </div>
+        <div class="category">
+            <a href="medical-devices.html">🩺 Medical Devices</a>
+            <div class="submenu">
+                <a href="#">Blood Pressure Monitors</a>
+                <a href="#">Thermometers</a>
+                <a href="#">Glucometers</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="personal-care.html">🧴 Personal Care</a>
-
-                <div class="submenu">
-                    <a href="#">Skin Care</a>
-                    <a href="#">Hair Care</a>
-                    <a href="#">Oral Care</a>
-                </div>
+        <div class="category">
+            <a href="personal-care.html">🧴 Personal Care</a>
+            <div class="submenu">
+                <a href="#">Skin Care</a>
+                <a href="#">Hair Care</a>
+                <a href="#">Oral Care</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="mens-health.html">👨 Men's Health</a>
-
-                <div class="submenu">
-                    <a href="#">Hair Loss</a>
-                    <a href="#">Performance</a>
-                    <a href="#">Wellness</a>
-                </div>
+        <div class="category">
+            <a href="mens-health.html">👨 Men's Health</a>
+            <div class="submenu">
+                <a href="#">Hair Loss</a>
+                <a href="#">Performance</a>
+                <a href="#">Wellness</a>
             </div>
+        </div>
 
-            <div class="category">
-                <a href="weight-loss.html">⚖️ Weight Loss</a>
-
-                <div class="submenu">
-                    <a href="#">Meal Replacements</a>
-                    <a href="#">Weight Management</a>
-                    <a href="#">Fitness Support</a>
-                </div>
+        <div class="category">
+            <a href="weight-loss.html">⚖️ Weight Loss</a>
+            <div class="submenu">
+                <a href="#">Meal Plans</a>
+                <a href="#">Supplements</a>
+                <a href="#">Fitness Support</a>
             </div>
-
         </div>
 
     </div>
 
+</div>
+
 </nav>
 
-    <a href="index.html">← Back Home</a>
+<a href="index.html" class="back">← Back Home</a>
+
 </body>
 </html>
