@@ -154,26 +154,188 @@
             <a href="#">Subscribe Now</a>
         </div>
     </section>
-    <!-- DOCTOR LIST -->
-    <section id="doctors">
-        <h2>Available Doctors</h2>
-        <div id="doctor-list">
-    <div class="doctor-card">
-        <img src="images/awad.jpg" alt="Dr Sarah Johnson">
-        <h3>Dr. Sarah Johnson</h3>
-        <p>Cardiologist</p>
-        <p>Consultation Fee: $40</p>
-        <a href="#">Book Appointment</a>
+   <!-- DOCTOR LIST -->
+<section id="doctors">
+    <h2>Our Medical Specialists</h2>
+    <p style="text-align:center; max-width:700px; margin:0 auto 30px; color:#666; font-size:16px;">
+        Consult with experienced and licensed healthcare professionals from various specialties. 
+        Book an appointment online and get the care you deserve.
+    </p>
+
+    <!-- Doctor Specialty Filter -->
+    <div class="doctor-filter">
+        <button class="active" onclick="filterDoctors('all')">All Specialists</button>
+        <button onclick="filterDoctors('cardiology')">Cardiology</button>
+        <button onclick="filterDoctors('dentistry')">Dentistry</button>
+        <button onclick="filterDoctors('pediatrics')">Pediatrics</button>
+        <button onclick="filterDoctors('gynecology')">Gynecology</button>
+        <button onclick="filterDoctors('dermatology')">Dermatology</button>
+        <button onclick="filterDoctors('orthopedics')">Orthopedics</button>
+        <button onclick="filterDoctors('ophthalmology')">Ophthalmology</button>
+        <button onclick="filterDoctors('general')">General Medicine</button>
     </div>
-    <div class="doctor-card">
-        <img src="images/Dr.-Irene-Nakalema.jpg" alt="Dr Michael Brown">
-        <h3>Dr. Michael Brown</h3>
-        <p>Dentist</p>
-        <p>Consultation Fee: $25</p>
-        <a href="#">Book Appointment</a>
+
+    <div id="doctor-list">
+        <!-- 1. CARDIOLOGY -->
+        <div class="doctor-card" data-specialty="cardiology">
+            <div class="doctor-badge">⭐ Top Rated</div>
+            <img src="images/awad.jpg" alt="Dr. Sarah Johnson">
+            <h3>Dr. Sarah Johnson</h3>
+            <p class="doctor-specialty">❤️ Cardiologist</p>
+            <p class="doctor-credentials">MBChB, MMed (Cardiology) | 14 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$40</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Fri, 8:00 AM - 4:00 PM</p>
+            <p class="doctor-hospital">📍 City Heart Hospital, Kampala</p>
+            <p class="doctor-bio">Specializes in heart disease diagnosis, hypertension management, and preventive cardiology.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(124 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=sarah-johnson&specialty=cardiology" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('sarah-johnson')">View Profile</button>
+        </div>
+
+        <!-- 2. DENTISTRY -->
+        <div class="doctor-card" data-specialty="dentistry">
+            <div class="doctor-badge">⭐ Best Rated</div>
+            <img src="images/Dr.-Irene-Nakalema.jpg" alt="Dr. Michael Brown">
+            <h3>Dr. Michael Brown</h3>
+            <p class="doctor-specialty">🦷 Dentist</p>
+            <p class="doctor-credentials">BDS, MSc (Oral Surgery) | 10 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$25</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Sat, 9:00 AM - 5:00 PM</p>
+            <p class="doctor-hospital">📍 Bright Smile Dental Clinic, Kampala</p>
+            <p class="doctor-bio">Expert in general dentistry, root canals, teeth whitening, and oral surgery.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(98 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=michael-brown&specialty=dentistry" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('michael-brown')">View Profile</button>
+        </div>
+
+        <!-- 3. PEDIATRICS -->
+        <div class="doctor-card" data-specialty="pediatrics">
+            <div class="doctor-badge">👶 Child Specialist</div>
+            <img src="images/doctor-placeholder.jpg" alt="Dr. Grace Achieng">
+            <h3>Dr. Grace Achieng</h3>
+            <p class="doctor-specialty">👶 Pediatrician</p>
+            <p class="doctor-credentials">MBChB, MMed (Pediatrics) | 12 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$35</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Fri, 8:00 AM - 3:00 PM</p>
+            <p class="doctor-hospital">📍 Children's Wellness Centre, Kampala</p>
+            <p class="doctor-bio">Specializes in child growth monitoring, vaccinations, childhood illnesses, and nutrition counseling.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(156 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=grace-achieng&specialty=pediatrics" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('grace-achieng')">View Profile</button>
+        </div>
+
+        <!-- 4. GYNECOLOGY -->
+        <div class="doctor-card" data-specialty="gynecology">
+            <div class="doctor-badge">🌸 Women's Health</div>
+            <img src="images/doctor-placeholder.jpg" alt="Dr. Nancy Kato">
+            <h3>Dr. Nancy Kato</h3>
+            <p class="doctor-specialty">🌸 Gynecologist</p>
+            <p class="doctor-credentials">MBChB, MMed (OB/GYN) | 16 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$45</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Sat, 9:00 AM - 5:00 PM</p>
+            <p class="doctor-hospital">📍 Women's Health Hospital, Kampala</p>
+            <p class="doctor-bio">Expert in prenatal care, family planning, reproductive health, and gynecological surgeries.</p>
+            <div class="doctor-rating">
+                ★★★★☆ <span>(87 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=nancy-kato&specialty=gynecology" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('nancy-kato')">View Profile</button>
+        </div>
+
+        <!-- 5. DERMATOLOGY -->
+        <div class="doctor-card" data-specialty="dermatology">
+            <img src="images/doctor-placeholder.jpg" alt="Dr. James Ochieng">
+            <h3>Dr. James Ochieng</h3>
+            <p class="doctor-specialty">🧴 Dermatologist</p>
+            <p class="doctor-credentials">MBChB, MMed (Dermatology) | 9 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$38</strong></p>
+            <p class="doctor-availability">📅 Available: Tue - Sat, 10:00 AM - 6:00 PM</p>
+            <p class="doctor-hospital">📍 Skin Care Clinic, Kampala</p>
+            <p class="doctor-bio">Treats skin conditions including acne, eczema, psoriasis, and performs skin cancer screenings.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(112 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=james-ochieng&specialty=dermatology" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('james-ochieng')">View Profile</button>
+        </div>
+
+        <!-- 6. ORTHOPEDICS -->
+        <div class="doctor-card" data-specialty="orthopedics">
+            <img src="images/doctor-placeholder.jpg" alt="Dr. Paul Mukasa">
+            <h3>Dr. Paul Mukasa</h3>
+            <p class="doctor-specialty">🦴 Orthopedic Surgeon</p>
+            <p class="doctor-credentials">MBChB, MMed (Orthopedics) | 15 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$50</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Fri, 8:00 AM - 2:00 PM</p>
+            <p class="doctor-hospital">📍 Bone & Joint Institute, Kampala</p>
+            <p class="doctor-bio">Specializes in fracture management, joint replacements, sports injuries, and spine surgery.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(76 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=paul-mukasa&specialty=orthopedics" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('paul-mukasa')">View Profile</button>
+        </div>
+
+        <!-- 7. OPHTHALMOLOGY -->
+        <div class="doctor-card" data-specialty="ophthalmology">
+            <div class="doctor-badge">👁️ Eye Specialist</div>
+            <img src="images/doctor-placeholder.jpg" alt="Dr. Rebecca Nalongo">
+            <h3>Dr. Rebecca Nalongo</h3>
+            <p class="doctor-specialty">👁️ Ophthalmologist</p>
+            <p class="doctor-credentials">MBChB, MMed (Ophthalmology) | 11 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$42</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Sat, 9:00 AM - 4:00 PM</p>
+            <p class="doctor-hospital">📍 Vision Care Eye Centre, Kampala</p>
+            <p class="doctor-bio">Expert in cataract surgery, glaucoma management, refractive errors, and pediatric eye care.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(134 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=rebecca-nalongo&specialty=ophthalmology" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('rebecca-nalongo')">View Profile</button>
+        </div>
+
+        <!-- 8. GENERAL MEDICINE -->
+        <div class="doctor-card" data-specialty="general">
+            <img src="images/doctor-placeholder.jpg" alt="Dr. David Ssempijja">
+            <h3>Dr. David Ssempijja</h3>
+            <p class="doctor-specialty">🩺 General Physician</p>
+            <p class="doctor-credentials">MBChB, MSc (Internal Medicine) | 8 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$20</strong></p>
+            <p class="doctor-availability">📅 Available: Mon - Sun, 7:00 AM - 7:00 PM</p>
+            <p class="doctor-hospital">📍 MedicalAssist Clinic, Kampala</p>
+            <p class="doctor-bio">Provides general health check-ups, management of common illnesses, chronic disease monitoring, and preventive care.</p>
+            <div class="doctor-rating">
+                ★★★★☆ <span>(203 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=david-ssempijja&specialty=general" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('david-ssempijja')">View Profile</button>
+        </div>
+
+        <!-- 9. NEUROLOGY -->
+        <div class="doctor-card" data-specialty="general">
+            <div class="doctor-badge">🧠 Brain Specialist</div>
+            <img src="images/doctor-placeholder.jpg" alt="Dr. Catherine Nakamya">
+            <h3>Dr. Catherine Nakamya</h3>
+            <p class="doctor-specialty">🧠 Neurologist</p>
+            <p class="doctor-credentials">MBChB, MMed (Neurology) | 13 years experience</p>
+            <p class="doctor-fee">Consultation Fee: <strong>$55</strong></p>
+            <p class="doctor-availability">📅 Available: Mon, Wed, Fri, 9:00 AM - 3:00 PM</p>
+            <p class="doctor-hospital">📍 Neuroscience Centre, Kampala</p>
+            <p class="doctor-bio">Diagnoses and treats neurological disorders including migraines, epilepsy, stroke, and neuropathy.</p>
+            <div class="doctor-rating">
+                ★★★★★ <span>(65 reviews)</span>
+            </div>
+            <a href="doctor-consultation.html?doctor=catherine-nakamya&specialty=neurology" class="book-btn">📅 Book Appointment</a>
+            <button class="view-profile-btn" onclick="viewDoctorProfile('catherine-nakamya')">View Profile</button>
+        </div>
     </div>
-</div>
-    </section>
+</section>
     <section class="reviews-section">
     <h2>What Our Patients Say</h2>
     <div class="reviews-container">
