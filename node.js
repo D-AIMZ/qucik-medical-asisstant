@@ -12,7 +12,7 @@ app.post('/api/send-sms', async (req, res) => {
     try {
         await client.messages.create({
             body: message,
-            from: '+1234567890', // Your Twilio number
+            from: '+256761726197', // Your Twilio number
             to: to
         });
         res.json({ success: true });
