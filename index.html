@@ -276,33 +276,36 @@
     <div class="contact-info">
         <p>📧 Email: support@medicalassist.com</p>
         <p>📞 Phone: +256 700 000000</p>
-       <div class="contact-info">
-    <p>📞 Phone: +256 700 000000</p>
-    <p>📍 Location: <span id="location">Detecting location...</span></p>
-</div>
+        <div class="contact-info">
+            <p>📞 Phone: +256 700 000000</p>
+            <p>📍 Location: <span id="location">Detecting location...</span></p>
+        </div>
         <p>🕒 Working Hours: Mon - Sun, 24hrs</p>
     </div>
 
-    <form class="contact-form">
+    <form class="contact-form" id="contactForm">
 
         <input
             type="text"
+            id="fullName"
             placeholder="Full Name"
             required
         >
 
         <input
             type="email"
+            id="emailAddress"
             placeholder="Email Address"
             required
         >
 
         <input
             type="tel"
+            id="phoneNumber"
             placeholder="Phone Number"
         >
 
-        <select required>
+        <select id="inquiryType" required>
             <option value="">Select Inquiry Type</option>
             <option>General Inquiry</option>
             <option>Appointment Booking</option>
@@ -311,6 +314,7 @@
         </select>
 
         <textarea
+            id="message"
             placeholder="Write your message here..."
             rows="6"
             required
@@ -322,25 +326,13 @@
 
     </form>
 
+    <!-- Status message placeholder -->
+    <div id="formStatus" style="display:none; margin-top:20px; padding:15px; border-radius:8px;"></div>
+
 </section>
 
-    </section>
-    <section class="medicine-search-section">
-
-    <h2>Browse More Trusted Medicines</h2>
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            placeholder="Search for products..."
-        >
-
-        <button type="submit">
-            🔍
-        </button>
-
-    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="contact.js"></script>
 
     <div class="medicine-categories">
 
