@@ -3,223 +3,890 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop By Categories</title>
+<title>Shop By Categories | MedicalAssist Pharmacy</title>
 
 <style>
-body{
-    margin:0;
-    font-family:'Segoe UI', sans-serif;
-    background:#f5f7fb;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* NAVBAR */
-.navbar{
-    background:#0d6efd;
-    padding:0;
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
+    color: #333;
 }
 
-/* MAIN BUTTON */
-.dropdown{
-    position:relative;
-    display:inline-block;
+/* ===== HEADER ===== */
+.page-header {
+    background: linear-gradient(135deg, #0d6efd, #00b4d8);
+    color: white;
+    text-align: center;
+    padding: 50px 20px 40px;
 }
 
-.dropbtn{
-    color:white;
-    text-decoration:none;
-    padding:18px 25px;
-    display:block;
-    font-weight:600;
-    font-size:16px;
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
-/* DROPDOWN PANEL */
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    width:340px;
-    background:#fff;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-    border-radius:10px;
-    overflow:hidden;
-    z-index:1000;
+.page-header p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: auto;
+    opacity: 0.9;
 }
 
-.dropdown:hover .dropdown-content{
-    display:block;
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+    padding: 15px 40px;
+    background: white;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
 }
 
-/* CATEGORY */
-.category{
-    position:relative;
+.breadcrumb a {
+    color: #0d6efd;
+    text-decoration: none;
 }
 
-.category > a{
-    display:flex;
-    justify-content:space-between;
-    padding:14px 18px;
-    color:#333;
-    text-decoration:none;
-    border-bottom:1px solid #eee;
-    transition:0.2s;
-    font-weight:500;
+.breadcrumb a:hover {
+    text-decoration: underline;
 }
 
-.category > a:hover{
-    background:#f0f6ff;
-    color:#0d6efd;
+.breadcrumb span {
+    color: #888;
+    margin: 0 8px;
 }
 
-/* SUBMENU */
-.submenu{
-    display:none;
-    position:absolute;
-    top:0;
-    left:100%;
-    width:260px;
-    background:#fff;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-    border-radius:10px;
-    overflow:hidden;
+/* ===== NAVBAR ===== */
+.navbar {
+    background: #0d6efd;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-.category:hover .submenu{
-    display:block;
+.navbar-brand {
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 16px 20px 16px 0;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    margin-right: 20px;
+    text-decoration: none;
 }
 
-.submenu a{
-    display:block;
-    padding:12px 16px;
-    text-decoration:none;
-    color:#444;
-    border-bottom:1px solid #f1f1f1;
-    transition:0.2s;
+/* ===== DROPDOWN ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-.submenu a:hover{
-    background:#0d6efd;
-    color:white;
+.dropbtn {
+    color: white;
+    text-decoration: none;
+    padding: 18px 25px;
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px 8px 0 0;
+    transition: 0.3s;
 }
 
-/* HEADER */
-h1{
-    text-align:center;
-    margin:30px 0;
-    color:#222;
+.dropbtn:hover {
+    background: rgba(255,255,255,0.2);
 }
 
-/* BACK BUTTON */
-.back{
-    display:inline-block;
-    margin:20px;
-    padding:10px 16px;
-    background:#222;
-    color:#fff;
-    text-decoration:none;
-    border-radius:6px;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 360px;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    z-index: 1000;
 }
 
-.back:hover{
-    background:#000;
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.category {
+    position: relative;
+}
+
+.category > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.category > a:hover {
+    background: #f0f6ff;
+    color: #0d6efd;
+}
+
+.category > a .arrow {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 280px;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-radius: 0 12px 12px 12px;
+    overflow: hidden;
+    z-index: 1001;
+}
+
+.category:hover .submenu {
+    display: block;
+    animation: slideRight 0.3s ease;
+}
+
+@keyframes slideRight {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.submenu a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #444;
+    border-bottom: 1px solid #f1f1f1;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.submenu a:hover {
+    background: #0d6efd;
+    color: white;
+    padding-left: 22px;
+}
+
+.submenu a:last-child {
+    border-bottom: none;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+/* ===== SECTION TITLE ===== */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    color: #003366;
+}
+
+.section-header .view-all {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.section-header .view-all:hover {
+    text-decoration: underline;
+}
+
+/* ===== CATEGORY GRID ===== */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.category-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    transition: 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+.category-card .icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.category-card h3 {
+    font-size: 18px;
+    color: #003366;
+    margin-bottom: 8px;
+}
+
+.category-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.category-card .product-count {
+    color: #0d6efd;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.category-card .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ff6b6b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ===== FEATURED PRODUCTS UNDER EACH CATEGORY ===== */
+.category-products {
+    margin-bottom: 50px;
+}
+
+.category-products h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.product-card .product-emoji {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.product-card h4 {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.product-card .product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+.product-card .product-original {
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+.product-card .add-btn {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.product-card .add-btn:hover {
+    background: #0b5ed7;
+}
+
+/* ===== STATS ===== */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.stat-item {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    text-align: center;
+    min-width: 150px;
+}
+
+.stat-item h3 {
+    color: #0d6efd;
+    font-size: 28px;
+}
+
+.stat-item p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-row {
+    display: flex;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #000;
+}
+
+.back-btn-outline {
+    background: transparent;
+    border: 2px solid #0d6efd;
+    color: #0d6efd;
+}
+
+.back-btn-outline:hover {
+    background: #0d6efd;
+    color: white;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .navbar {
+        padding: 0 15px;
+        flex-wrap: wrap;
+    }
+
+    .navbar-brand {
+        font-size: 15px;
+        padding: 14px 10px 14px 0;
+        margin-right: 10px;
+    }
+
+    .dropbtn {
+        font-size: 14px;
+        padding: 14px 15px;
+    }
+
+    .dropdown-content {
+        width: 300px;
+    }
+
+    .submenu {
+        position: static;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        border-left: 3px solid #0d6efd;
+        margin-left: 10px;
+    }
+
+    .category:hover .submenu {
+        animation: none;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .breadcrumb {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    .stats-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Shop By Categories</h1>
+<!-- ===== HEADER ===== -->
+<div class="page-header">
+    <h1>🛒 Shop By Categories</h1>
+    <p>Browse our wide range of medicines, health products, and wellness essentials — all in one place.</p>
+</div>
 
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <a href="online-pharmacy.html">Pharmacy</a>
+    <span>›</span>
+    <strong>All Categories</strong>
+</div>
+
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
+    <a href="index.html" class="navbar-brand">🏥 MedicalAssist</a>
 
-<div class="dropdown">
+    <div class="dropdown">
+        <a href="#" class="dropbtn">☰ SHOP BY CATEGORIES ▼</a>
 
-    <a href="#" class="dropbtn">☰ SHOP BY CATEGORIES</a>
+        <div class="dropdown-content">
+            <div class="category">
+                <a href="medicines.html">💊 Medicines <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Prescription Medicines</a>
+                    <a href="#">Pain Relief</a>
+                    <a href="#">Antibiotics</a>
+                    <a href="#">Diabetes Care</a>
+                    <a href="#">Heart & BP Medication</a>
+                </div>
+            </div>
 
-    <div class="dropdown-content">
+            <div class="category">
+                <a href="otc.html">💊 Over-the-Counter <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Cold & Flu Relief</a>
+                    <a href="#">Allergy Relief</a>
+                    <a href="#">Digestive Health</a>
+                    <a href="#">First Aid</a>
+                </div>
+            </div>
 
-        <div class="category">
-            <a href="medicines.html">💊 Medicines</a>
-            <div class="submenu">
-                <a href="#">Prescription Medicines</a>
-                <a href="#">Pain Relief</a>
-                <a href="#">Antibiotics</a>
-                <a href="#">Diabetes Care</a>
+            <div class="category">
+                <a href="vitamins.html">🧴 Vitamins & Supplements <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Multivitamins</a>
+                    <a href="#">Vitamin C</a>
+                    <a href="#">Vitamin D</a>
+                    <a href="#">Calcium</a>
+                    <a href="#">Iron & Folic Acid</a>
+                    <a href="#">Omega-3 Fish Oil</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="health-food.html">🥤 Health Food & Drinks <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Protein Drinks</a>
+                    <a href="#">Healthy Snacks</a>
+                    <a href="#">Herbal Teas</a>
+                    <a href="#">Nutritional Drinks</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="medical-devices.html">🩺 Medical Devices <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Blood Pressure Monitors</a>
+                    <a href="#">Thermometers</a>
+                    <a href="#">Glucometers</a>
+                    <a href="#">Nebulizers</a>
+                    <a href="#">Pulse Oximeters</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="personal-care.html">🧴 Personal Care <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Skin Care</a>
+                    <a href="#">Hair Care</a>
+                    <a href="#">Oral Care</a>
+                    <a href="#">Baby Care</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="mens-health.html">👨 Men's Health <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Hair Loss Treatment</a>
+                    <a href="#">Performance & Vitality</a>
+                    <a href="#">Men's Multivitamins</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="weight-loss.html">⚖️ Weight Loss <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Meal Replacement</a>
+                    <a href="#">Fat Burners</a>
+                    <a href="#">Appetite Control</a>
+                    <a href="#">Fitness Support</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="baby-care.html">🍼 Baby & Maternity <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Baby Formula</a>
+                    <a href="#">Diapers & Wipes</a>
+                    <a href="#">Maternity Vitamins</a>
+                    <a href="#">Baby Skincare</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <a href="elderly-care.html">👴 Elderly Care <span class="arrow">▶</span></a>
+                <div class="submenu">
+                    <a href="#">Joint Support</a>
+                    <a href="#">Memory & Brain Health</a>
+                    <a href="#">Mobility Aids</a>
+                </div>
             </div>
         </div>
+    </div>
+</nav>
 
-        <div class="category">
-            <a href="otc.html">💊 Over-the-Counter</a>
-            <div class="submenu">
-                <a href="#">Cold & Flu</a>
-                <a href="#">Allergy Relief</a>
-                <a href="#">Digestive Health</a>
-            </div>
-        </div>
+<!-- ===== MAIN CONTENT ===== -->
+<div class="container">
 
-        <div class="category">
-            <a href="vitamins.html">🧴 Vitamins & Supplements</a>
-            <div class="submenu">
-                <a href="#">Multivitamins</a>
-                <a href="#">Vitamin C</a>
-                <a href="#">Calcium</a>
-                <a href="#">Iron</a>
-            </div>
-        </div>
+    <!-- ===== CATEGORY OVERVIEW GRID ===== -->
+    <div class="section-header">
+        <h2>📂 All Categories</h2>
+        <span class="view-all">500+ Products Available</span>
+    </div>
 
-        <div class="category">
-            <a href="health-food.html">🥤 Health Food & Drinks</a>
-            <div class="submenu">
-                <a href="#">Protein Drinks</a>
-                <a href="#">Healthy Snacks</a>
-                <a href="#">Herbal Teas</a>
-            </div>
-        </div>
+    <div class="category-grid">
 
-        <div class="category">
-            <a href="medical-devices.html">🩺 Medical Devices</a>
-            <div class="submenu">
-                <a href="#">Blood Pressure Monitors</a>
-                <a href="#">Thermometers</a>
-                <a href="#">Glucometers</a>
-            </div>
-        </div>
+        <a href="medicines.html" class="category-card">
+            <span class="badge">Popular</span>
+            <div class="icon">💊</div>
+            <h3>Medicines</h3>
+            <p>Prescription & OTC medicines for common health conditions.</p>
+            <span class="product-count">120+ Products →</span>
+        </a>
 
-        <div class="category">
-            <a href="personal-care.html">🧴 Personal Care</a>
-            <div class="submenu">
-                <a href="#">Skin Care</a>
-                <a href="#">Hair Care</a>
-                <a href="#">Oral Care</a>
-            </div>
-        </div>
+        <a href="vitamins.html" class="category-card">
+            <div class="icon">🧴</div>
+            <h3>Vitamins & Supplements</h3>
+            <p>Boost your health with daily vitamins and nutritional supplements.</p>
+            <span class="product-count">85+ Products →</span>
+        </a>
 
-        <div class="category">
-            <a href="mens-health.html">👨 Men's Health</a>
-            <div class="submenu">
-                <a href="#">Hair Loss</a>
-                <a href="#">Performance</a>
-                <a href="#">Wellness</a>
-            </div>
-        </div>
+        <a href="otc.html" class="category-card">
+            <span class="badge" style="background:#28a745;">Everyday</span>
+            <div class="icon">💊</div>
+            <h3>Over-the-Counter</h3>
+            <p>Cold relief, pain killers, allergy meds, and digestive aids.</p>
+            <span class="product-count">60+ Products →</span>
+        </a>
 
-        <div class="category">
-            <a href="weight-loss.html">⚖️ Weight Loss</a>
-            <div class="submenu">
-                <a href="#">Meal Plans</a>
-                <a href="#">Supplements</a>
-                <a href="#">Fitness Support</a>
-            </div>
-        </div>
+        <a href="health-food.html" class="category-card">
+            <div class="icon">🥤</div>
+            <h3>Health Food & Drinks</h3>
+            <p>Nutritious drinks, protein powders, and healthy snacks.</p>
+            <span class="product-count">45+ Products →</span>
+        </a>
+
+        <a href="medical-devices.html" class="category-card">
+            <div class="icon">🩺</div>
+            <h3>Medical Devices</h3>
+            <p>BP monitors, thermometers, glucometers, and more.</p>
+            <span class="product-count">35+ Products →</span>
+        </a>
+
+        <a href="personal-care.html" class="category-card">
+            <div class="icon">🧴</div>
+            <h3>Personal Care</h3>
+            <p>Skincare, haircare, oral hygiene, and baby products.</p>
+            <span class="product-count">70+ Products →</span>
+        </a>
+
+        <a href="mens-health.html" class="category-card">
+            <div class="icon">👨</div>
+            <h3>Men's Health</h3>
+            <p>Hair loss, vitality, and men's wellness essentials.</p>
+            <span class="product-count">25+ Products →</span>
+        </a>
+
+        <a href="weight-loss.html" class="category-card">
+            <span class="badge" style="background:#ff922b;">Trending</span>
+            <div class="icon">⚖️</div>
+            <h3>Weight Loss</h3>
+            <p>Meal plans, fat burners, and fitness supplements.</p>
+            <span class="product-count">30+ Products →</span>
+        </a>
+
+        <a href="baby-care.html" class="category-card">
+            <div class="icon">🍼</div>
+            <h3>Baby & Maternity</h3>
+            <p>Formula, diapers, maternity vitamins, and baby skincare.</p>
+            <span class="product-count">40+ Products →</span>
+        </a>
+
+        <a href="elderly-care.html" class="category-card">
+            <div class="icon">👴</div>
+            <h3>Elderly Care</h3>
+            <p>Joint support, brain health, and mobility aids.</p>
+            <span class="product-count">20+ Products →</span>
+        </a>
 
     </div>
 
+    <!-- ===== FEATURED PRODUCTS BY CATEGORY ===== -->
+    <div class="category-products">
+        <h2>💊 Top Medicines</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-emoji">💊</div>
+                <h4>Panadol Extra 500mg</h4>
+                <div>
+                    <span class="product-price">UGX 5,000</span>
+                    <span class="product-original">UGX 6,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💊</div>
+                <h4>Amoxicillin 500mg</h4>
+                <div>
+                    <span class="product-price">UGX 8,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💊</div>
+                <h4>Brufen 400mg</h4>
+                <div>
+                    <span class="product-price">UGX 7,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💊</div>
+                <h4>Metformin 500mg</h4>
+                <div>
+                    <span class="product-price">UGX 7,000</span>
+                    <span class="product-original">UGX 9,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💊</div>
+                <h4>Ciprofloxacin 500mg</h4>
+                <div>
+                    <span class="product-price">UGX 12,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-products">
+        <h2>🧴 Best Selling Vitamins</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-emoji">🍊</div>
+                <h4>Vitamin C 1000mg</h4>
+                <div>
+                    <span class="product-price">UGX 8,000</span>
+                    <span class="product-original">UGX 10,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">☀️</div>
+                <h4>Vitamin D3 2000IU</h4>
+                <div>
+                    <span class="product-price">UGX 12,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">🐟</div>
+                <h4>Omega-3 Fish Oil</h4>
+                <div>
+                    <span class="product-price">UGX 18,000</span>
+                    <span class="product-original">UGX 22,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💪</div>
+                <h4>Multivitamin Complex</h4>
+                <div>
+                    <span class="product-price">UGX 15,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">🦴</div>
+                <h4>Calcium + D3</h4>
+                <div>
+                    <span class="product-price">UGX 14,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-products">
+        <h2>🩺 Top Medical Devices</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-emoji">🩺</div>
+                <h4>Digital BP Monitor</h4>
+                <div>
+                    <span class="product-price">UGX 45,000</span>
+                    <span class="product-original">UGX 55,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">🌡️</div>
+                <h4>Digital Thermometer</h4>
+                <div>
+                    <span class="product-price">UGX 12,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">🩸</div>
+                <h4>Glucometer Kit</h4>
+                <div>
+                    <span class="product-price">UGX 35,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💨</div>
+                <h4>Pulse Oximeter</h4>
+                <div>
+                    <span class="product-price">UGX 25,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-emoji">💧</div>
+                <h4>Nebulizer Machine</h4>
+                <div>
+                    <span class="product-price">UGX 65,000</span>
+                </div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== STATS ===== -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <h3>500+</h3>
+            <p>Products</p>
+        </div>
+        <div class="stat-item">
+            <h3>10</h3>
+            <p>Categories</p>
+        </div>
+        <div class="stat-item">
+            <h3>24/7</h3>
+            <p>Online Ordering</p>
+        </div>
+        <div class="stat-item">
+            <h3>Free</h3>
+            <p>Delivery Available</p>
+        </div>
+    </div>
+
+    <!-- ===== BACK BUTTONS ===== -->
+    <div class="back-row">
+        <a href="online-pharmacy.html" class="back-btn">← Back to Pharmacy</a>
+        <a href="index.html" class="back-btn back-btn-outline">🏠 Back to Home</a>
+    </div>
+
 </div>
-
-</nav>
-
-<a href="index.html" class="back">← Back Home</a>
 
 </body>
 </html>
