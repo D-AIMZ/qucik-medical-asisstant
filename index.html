@@ -9,37 +9,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <h1>Medical Assistance</h1>
-        <p>Find nearby doctors, hospitals and pharmacies</p>
-    </header>
-    <!-- TOP NAVIGATION -->
+   <!-- ===== HEADER SECTION ===== -->
+<header class="site-header">
+    <h1>🏥 MedicalAssist</h1>
+    <p>Find nearby doctors, hospitals and pharmacies</p>
+</header>
+
+<!-- ===== TOP NAVIGATION BAR ===== -->
 <section class="top-navbar">
+
+    <!-- LEFT: Logo + Contact -->
     <div class="logo-section">
-        <img src="images/w3cert.gif" alt="Medical Assistance Logo" class="logo">
+        <img src="images/w3cert.gif" alt="MedicalAssist Logo" class="logo">
         <div class="contact-info">
-            <p><strong>WhatsApp Us</strong></p>
-            <p>+256 704068587</p>
+            <p class="contact-label"><strong>📱 WhatsApp Us</strong></p>
+            <p class="contact-number">+256 704 068 587</p>
         </div>
     </div>
-    <!-- SEARCH BAR -->
+
+    <!-- CENTER: Search Bar -->
     <div class="search-container">
-        <select>
-            <option>All Categories</option>
-            <option>Doctors</option>
-            <option>Hospitals</option>
-            <option>Pharmacy</option>
-            <option>Medicines</option>
+        <select id="category-filter" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+            <option value="doctors">Doctors</option>
+            <option value="hospitals">Hospitals</option>
+            <option value="pharmacy">Pharmacy</option>
+            <option value="medicines">Medicines</option>
         </select>
-        <label for="search" class="sr-only"> </label>
-<input id="search" type="search" placeholder="Search for doctors, medicines...">
-        <button> 🔍</button>
+        <label for="search-input" class="sr-only">Search MedicalAssist</label>
+        <input id="search-input" type="search" placeholder="Search for doctors, medicines..." class="search-input">
+        <button type="submit" class="search-btn" aria-label="Search">🔍</button>
     </div>
-    <!-- USER SECTION -->
-    <div class="user-section"><a href="#">Signin/Signup</a>
-    <a href="#"> <img src="images/cart.png" alt="Cart" class="cart-icon"> Cart </a>
-</div>
+
+    <!-- RIGHT: User Actions -->
+    <div class="user-section">
+        <a href="#" class="user-link">
+            <span class="user-icon">👤</span> Sign In / Sign Up
+        </a>
+        <a href="#" class="user-link cart-link">
+            <img src="images/cart.png" alt="Shopping Cart" class="cart-icon">
+            <span class="cart-text">Cart</span>
+            <span class="cart-badge">0</span>
+        </a>
+    </div>
 </section>
 <!-- MENU -->
 <section class="menu-bar">
