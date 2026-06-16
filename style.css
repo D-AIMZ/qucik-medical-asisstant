@@ -1563,3 +1563,219 @@ a.btn:hover {
         font-size: 14px;
     }
 }
+/* ===== HEADER ===== */
+.site-header {
+    background: linear-gradient(135deg, #003366, #0d6efd);
+    color: white;
+    text-align: center;
+    padding: 15px 20px; /* was 30px */
+}
+
+.site-header h1 {
+    font-size: 1.5rem; /* was 2.5rem */
+    margin-bottom: 4px; /* was 8px */
+    letter-spacing: 0.5px; /* was 1px */
+}
+
+.site-header p {
+    font-size: 0.9rem; /* was 1.1rem */
+    opacity: 0.9;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* ===== TOP NAVBAR ===== */
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 25px; /* was 15px 40px */
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); /* reduced shadow */
+    flex-wrap: wrap;
+    gap: 8px; /* was 15px */
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* ===== LEFT: LOGO + CONTACT ===== */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* was 20px */
+}
+
+.logo {
+    width: 36px; /* was 50px */
+    height: 36px; /* was 50px */
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.contact-info {
+    border-left: 2px solid #e0e0e0;
+    padding-left: 12px; /* was 18px */
+}
+
+.contact-label {
+    font-size: 10px; /* was 12px */
+    color: #888;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* was 1px */
+}
+
+.contact-number {
+    font-size: 13px; /* was 16px */
+    font-weight: 700;
+    color: #003366;
+    margin: 1px 0 0 0; /* was 2px */
+}
+
+/* ===== CENTER: SEARCH ===== */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #f0f4ff;
+    border-radius: 8px; /* was 10px */
+    overflow: hidden;
+    border: 1.5px solid #e0e7ff; /* was 2px */
+    transition: border-color 0.3s;
+    flex: 1;
+    max-width: 450px; /* was 550px */
+    min-width: 220px; /* was 280px */
+}
+
+.search-container select {
+    border: none;
+    padding: 8px 10px; /* was 12px 15px */
+    background: transparent;
+    outline: none;
+    font-size: 12px; /* was 14px */
+    color: #333;
+    cursor: pointer;
+    min-width: 100px; /* was 130px */
+    border-right: 1px solid #ddd;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 8px 10px; /* was 12px 15px */
+    outline: none;
+    font-size: 13px; /* was 15px */
+    background: transparent;
+    min-width: 120px; /* was 150px */
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-btn {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px 14px; /* was 12px 20px */
+    cursor: pointer;
+    font-size: 14px; /* was 18px */
+    transition: background 0.3s;
+}
+
+.search-btn:hover {
+    background: #0b5ed7;
+}
+
+/* ===== RIGHT: USER SECTION ===== */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* was 10px */
+}
+
+.user-link {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* was 6px */
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 12px; /* was 14px */
+    padding: 6px 10px; /* was 8px 14px */
+    border-radius: 6px; /* was 8px */
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.user-link:hover {
+    background: #f0f4ff;
+    color: #0d6efd;
+}
+
+.user-icon {
+    font-size: 15px; /* was 18px */
+}
+
+.cart-link {
+    position: relative;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+}
+
+.cart-icon {
+    width: 18px; /* was 22px */
+    height: 18px; /* was 22px */
+    object-fit: contain;
+}
+
+.cart-badge {
+    background: #dc3545;
+    color: white;
+    font-size: 9px; /* was 11px */
+    font-weight: 700;
+    padding: 1px 5px; /* was 2px 7px */
+    border-radius: 8px;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .top-navbar {
+        padding: 8px 15px; /* was 12px 20px */
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 1.3rem; /* was 1.8rem */
+    }
+
+    .site-header p {
+        font-size: 0.8rem;
+    }
+
+    .search-container select {
+        min-width: 80px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .search-input {
+        padding: 6px 8px;
+        font-size: 12px;
+        min-width: 80px;
+    }
+
+    .search-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .contact-number {
+        font-size: 12px;
+    }
+}
