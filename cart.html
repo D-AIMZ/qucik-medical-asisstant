@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your shopping cart - MedicalAssist Pharmacy">
+    <title>Shopping Cart | MedicalAssist</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== CART PAGE SPECIFIC STYLES ===== */
+
+        .cart-page {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .cart-page h1 {
+            font-size: 28px;
+            color: #003366;
+            margin-bottom: 5px;
+        }
+
+        .cart-page .cart-subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        /* ===== CART ITEMS ===== */
+        .cart-items {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .cart-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 40px;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            font-weight: 600;
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 40px;
+            padding: 18px 20px;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item:hover {
+            background: #fafbfc;
+        }
+
+        .cart-item-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-item-emoji {
+            width: 50px;
+            height: 50px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info h4 {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .cart-item-info p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: #0d6efd;
+            font-size: 15px;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-item-qty button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-qty button:hover {
+            background: #f0f4ff;
+            border-color: #0d6efd;
+        }
+
+        .cart-item-qty span {
+            width: 30px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .cart-item-total {
+            font-weight: 700;
+            color: #003366;
+            font-size: 15px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #ccc;
+            transition: 0.2s;
+            padding: 5px;
+        }
+
+        .cart-item-remove:hover {
+            color: #dc3545;
+        }
+
+        /* ===== CART SUMMARY ===== */
+        .cart-summary {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+            padding: 25px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .cart-summary h3 {
+            font-size: 20px;
+            color: #003366;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 15px;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid #f0f0f0;
+            margin-top: 10px;
+            padding-top: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .summary-row .label {
+            color: #666;
+        }
+
+        .summary-row .value {
+            font-weight: 600;
+        }
+
+        .summary-row.total .value {
+            color: #0d6efd;
+            font-size: 22px;
+        }
+
+        .promo-code {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .promo-code input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .promo-code input:focus {
+            border-color: #0d6efd;
+        }
+
+        .promo-code button {
+            padding: 10px 18px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .promo-code button:hover {
+            background: #5a6268;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: #0b5ed7;
+        }
+
+        .continue-shopping {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .continue-shopping:hover {
+            text-decoration: underline;
+        }
+
+        .payment-icons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .payment-icons img {
+            height: 28px;
+            opacity: 0.6;
+        }
+
+        /* ===== EMPTY CART ===== */
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cart-empty .empty-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .cart-empty h2 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .cart-empty p {
+            color: #888;
+            margin-bottom: 25px;
+        }
+        .cart-empty .shop-btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .cart-empty .shop-btn:hover {
+            background: #0b5ed7;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cart-header {
+                display: none;
+            }
+
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .cart-item-product {
+                grid-column: 1;
+            }
+
+            .cart-item-price,
+            .cart-item-qty,
+            .cart-item-total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 0;
+                border-top: 1px solid #f5f5f5;
+            }
+
+            .cart-item-price::before { content: "Price: "; font-weight: 400; color: #888; }
+            .cart-item-qty::before { content: "Qty: "; font-weight: 400; color: #888; }
+            .cart-item-total::before { content: "Total: "; font-weight: 400; color: #888; }
+
+            .cart-item-remove {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .cart-item {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+    <h1>🛒 Shopping Cart</h1>
+    <p>Review your items and proceed to checkout</p>
+</header>
+
+<!-- ===== TOP NAVBAR ===== -->
+<section class="top-navbar">
+    <div class="logo-section">
+        <img src="images/w3cert.gif" alt="MedicalAssist Logo" class="logo">
+        <div class="contact-info">
+            <p class="contact-label"><strong>📱 WhatsApp Us</strong></p>
+            <p class="contact-number">+256 704 068 587</p>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <select id="category-filter" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+            <option value="doctors">Doctors</option>
+            <option value="hospitals">Hospitals</option>
+            <option value="pharmacy">Pharmacy</option>
+            <option value="medicines">Medicines</option>
+        </select>
+        <label for="search-input" class="sr-only">Search MedicalAssist</label>
+        <input id="search-input" type="search" placeholder="Search for doctors, medicines..." class="search-input">
+        <button type="submit" class="search-btn" aria-label="Search">🔍</button>
+    </div>
+
+    <div class="user-section">
+        <a href="signin.html" class="user-link">
+            <span class="user-icon">👤</span> Sign In / Sign Up
+        </a>
+        <a href="cart.html" class="user-link cart-link">
+            <img src="images/cart.png" alt="Shopping Cart" class="cart-icon">
+            <span class="cart-text">Cart</span>
+            <span class="cart-badge" id="headerCartCount">3</span>
+        </a>
+    </div>
+</section>
+
+<!-- ===== MENU BAR ===== -->
+<section class="menu-bar">
+    <nav>
+        <a href="categories.html">☰ Shop By Categories</a>
+        <a href="online-pharmacy.html">Online Pharmacy</a>
+        <a href="doctor-consultation.html">Doctor Consultation</a>
+        <a href="mens-health.html">Men's Health</a>
+        <a href="weight-loss.html">Weight Loss</a>
+        <a href="birth-control-pills.html">Birth Control Pills</a>
+        <a href="morning-after-pills.html">Morning After Pills</a>
+    </nav>
+</section>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb" style="max-width:1100px; margin:15px auto 0; padding:0 20px;">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <a href="online-pharmacy.html">Pharmacy</a>
+    <span>›</span>
+    <strong>Shopping Cart</strong>
+</div>
+
+<!-- ===== CART PAGE ===== -->
+<div class="cart-page">
+
+    <h1>🛒 Your Cart</h1>
+    <p class="cart-subtitle"><span id="cartItemCount">3</span> item(s) in your cart</p>
+
+    <div class="cart-layout">
+
+        <!-- ===== LEFT: CART ITEMS ===== -->
+        <div class="cart-items" id="cartItemsContainer">
+
+            <!-- Cart Header -->
+            <div class="cart-header">
+                <span>Product</span>
+                <span>Price</span>
+                <span>Quantity</span>
+                <span>Total</span>
+                <span></span>
+            </div>
+
+            <!-- Cart Item 1 -->
+            <div class="cart-item" data-id="1">
+                <div class="cart-item-product">
+                    <div class="cart-item-emoji">💊</div>
+                    <div class="cart-item-info">
+                        <h4>Panadol Extra 500mg</h4>
+                        <p>Pain Relief | 24 tablets</p>
+                    </div>
+                </div>
+                <div class="cart-item-price">UGX 5,000</div>
+                <div class="cart-item-qty">
+                    <button onclick="changeQty(this, -1)">−</button>
+                    <span class="qty-value">2</span>
+                    <button onclick="changeQty(this, 1)">+</button>
+                </div>
+                <div class="cart-item-total">UGX 10,000</div>
+                <button class="cart-item-remove" onclick="removeItem(this)" title="Remove">✕</button>
+            </div>
+
+            <!-- Cart Item 2 -->
+            <div class="cart-item" data-id="2">
+                <div class="cart-item-product">
+                    <div class="cart-item-emoji">🍊</div>
+                    <div class="cart-item-info">
+                        <h4>Vitamin C 1000mg</h4>
+                        <p>Immunity Boost | 30 tabs</p>
+                    </div>
+                </div>
+                <div class="cart-item-price">UGX 8,000</div>
+                <div class="cart-item-qty">
+                    <button onclick="changeQty(this, -1)">−</button>
+                    <span class="qty-value">1</span>
+                    <button onclick="changeQty(this, 1)">+</button>
+                </div>
+                <div class="cart-item-total">UGX 8,000</div>
+                <button class="cart-item-remove" onclick="removeItem(this)" title="Remove">✕</button>
+            </div>
+
+            <!-- Cart Item 3 -->
+            <div class="cart-item" data-id="3">
+                <div class="cart-item-product">
+                    <div class="cart-item-emoji">🩹</div>
+                    <div class="cart-item-info">
+                        <h4>First Aid Kit (50pcs)</h4>
+                        <p>Emergency Kit | Complete Set</p>
+                    </div>
+                </div>
+                <div class="cart-item-price">UGX 25,000</div>
+                <div class="cart-item-qty">
+                    <button onclick="changeQty(this, -1)">−</button>
+                    <span class="qty-value">1</span>
+                    <button onclick="changeQty(this, 1)">+</button>
+                </div>
+                <div class="cart-item-total">UGX 25,000</div>
+                <button class="cart-item-remove" onclick="removeItem(this)" title="Remove">✕</button>
+            </div>
+
+        </div>
+
+        <!-- ===== RIGHT: ORDER SUMMARY ===== -->
+        <div class="cart-summary">
+            <h3>📋 Order Summary</h3>
+
+            <div class="summary-row">
+                <span class="label">Subtotal</span>
+                <span class="value" id="subtotal">UGX 43,000</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Delivery Fee</span>
+                <span class="value" style="color:#28a745;">FREE</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Discount</span>
+                <span class="value" style="color:#dc3545;">-UGX 0</span>
+            </div>
+
+            <div class="promo-code">
+                <input type="text" placeholder="Enter promo code" id="promoInput">
+                <button onclick="applyPromo()">Apply</button>
+            </div>
+
+            <div class="summary-row total">
+                <span class="label">Total</span>
+                <span class="value" id="cartTotal">UGX 43,000</span>
+            </div>
+
+            <button class="checkout-btn" onclick="proceedCheckout()">🚀 Proceed to Checkout</button>
+
+            <a href="online-pharmacy.html" class="continue-shopping">← Continue Shopping</a>
+
+            <div class="payment-icons">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" alt="Visa" title="Visa">
+                <img src="https://cdn-icons-png.flaticon.com/512/196/196561.png" alt="Mastercard" title="Mastercard">
+                <img src="https://cdn-icons-png.flaticon.com/512/349/349228.png" alt="Mobile Money" title="Mobile Money">
+                <img src="https://cdn-icons-png.flaticon.com/512/825/825454.png" alt="Cash" title="Cash on Delivery">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <img src="images/w3cert.gif" alt="MedicalAssist Logo" class="footer-logo">
+            <p>MedicalAssist is your all-in-one digital healthcare platform offering online doctor consultations, pharmacy services, and expert medical support anytime, anywhere.</p>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                </a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <h3>MedicalAssist</h3>
+            <a href="about.html">About Us</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+
+        <div class="footer-links">
+            <h3>Online Pharmacy</h3>
+            <a href="online-pharmacy.html?category=prescription">Prescription Medicine</a>
+            <a href="vitamins.html">Vitamins & Supplements</a>
+            <a href="personal-care.html">Personal Care</a>
+            <a href="medical-devices.html">Medical Devices</a>
+        </div>
+
+        <div class="footer-links">
+            <h3>Account</h3>
+            <a href="cart.html">Cart</a>
+            <a href="my-account.html">My Account</a>
+            <a href="my-orders.html">My Orders</a>
+            <a href="wishlist.html">Wishlist</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="bottom-card">
+            <h3>📞 Need Help?</h3>
+            <p>Didn't find what you were looking for?</p>
+            <a href="contact.html">Contact Us Here</a>
+        </div>
+        <div class="bottom-card">
+            <h3>💬 Feedback</h3>
+            <p>We'd love to hear what you think!</p>
+            <a href="feedback.html">Share Feedback</a>
+        </div>
+        <div class="bottom-card">
+            <h3>📱 Download App</h3>
+            <p>Get special discounts on your first purchase.</p>
+            <a href="#" class="playstore-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="playstore-badge">
+            </a>
+            <a href="#" class="playstore-link">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" class="playstore-badge">
+            </a>
+        </div>
+    </div>
+</footer>
+
+<footer class="copyright-footer" style="background:#222; color:white; text-align:center; padding:15px;">
+    <p>&copy; 2026 D'Aims Tech | All Rights Reserved</p>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    // ===== CART FUNCTIONALITY =====
+
+    // Change quantity
+    function changeQty(button, delta) {
+        const item = button.closest('.cart-item');
+        const qtySpan = item.querySelector('.qty-value');
+        let qty = parseInt(qtySpan.textContent);
+        qty += delta;
+        if (qty < 1) {
+            if (confirm('Remove this item from cart?')) {
+                item.remove();
+                updateCart();
+            }
+            return;
+        }
+        qtySpan.textContent = qty;
+        updateCart();
+    }
+
+    // Remove item
+    function removeItem(button) {
+        if (confirm('Remove this item from your cart?')) {
+            const item = button.closest('.cart-item');
+            item.remove();
+            updateCart();
+        }
+    }
+
+    // Update cart totals
+    function updateCart() {
+        const items = document.querySelectorAll('.cart-item');
+        let subtotal = 0;
+        let count = 0;
+
+        items.forEach(item => {
+            const priceText = item.querySelector('.cart-item-price').textContent;
+            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+            const qty = parseInt(item.querySelector('.qty-value').textContent);
+            const total = price * qty;
+            subtotal += total;
+            count += qty;
+            item.querySelector('.cart-item-total').textContent = 'UGX ' + total.toLocaleString();
+        });
+
+        // Update summary
+        document.getElementById('subtotal').textContent = 'UGX ' + subtotal.toLocaleString();
+        document.getElementById('cartTotal').textContent = 'UGX ' + subtotal.toLocaleString();
+        document.getElementById('cartItemCount').textContent = count;
+        document.getElementById('headerCartCount').textContent = count;
+
+        // Show empty state if no items
+        const container = document.getElementById('cartItemsContainer');
+        const header = container.querySelector('.cart-header');
+
+        if (items.length === 0) {
+            if (header) header.style.display = 'none';
+            container.innerHTML = `
+                <div class="cart-empty">
+                    <div class="empty-icon">🛒</div>
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added any items yet. Start shopping!</p>
+                    <a href="online-pharmacy.html" class="shop-btn">🛍️ Start Shopping</a>
+                </div>
+            `;
+        }
+    }
+
+    // Apply promo code
+    function applyPromo() {
+        const input = document.getElementById('promoInput');
+        const code = input.value.trim().toUpperCase();
+
+        if (code === 'MEDICAL10') {
+            const subtotalText = document.getElementById('subtotal').textContent;
+            const subtotal = parseInt(subtotalText.replace(/[^0-9]/g, ''));
+            const discount = Math.round(subtotal * 0.1);
+            document.querySelector('.summary-row:nth-child(3) .value').textContent = '-UGX ' + discount.toLocaleString();
+            document.getElementById('cartTotal').textContent = 'UGX ' + (subtotal - discount).toLocaleString();
+            alert('✅ Promo applied! You got 10% off!');
+        } else if (code === 'FREESHIP') {
+            alert('✅ Free delivery already applied!');
+        } else if (code) {
+            alert('❌ Invalid promo code. Try: MEDICAL10');
+        }
+
+        input.value = '';
+    }
+
+    // Checkout
+    function proceedCheckout() {
+        const items = document.querySelectorAll('.cart-item');
+        if (items.length === 0) {
+            alert('Your cart is empty! Add some items first.');
+            return;
+        }
+
+        const total = document.getElementById('cartTotal').textContent;
+        let itemList = '';
+        items.forEach((item, index) => {
+            const name = item.querySelector('.cart-item-info h4').textContent;
+            const qty = item.querySelector('.qty-value').textContent;
+            itemList += `\n${index + 1}. ${name} x${qty}`;
+        });
+
+        const message = `📦 ORDER SUMMARY\n———————\n${itemList}\n———————\n💰 TOTAL: ${total}\n\nThank you for shopping with MedicalAssist! We'll process your order shortly.`;
+
+        alert(message);
+
+        // Simulate redirect
+        if (confirm('Proceed to payment?')) {
+            window.location.href = 'checkout.html';
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCart();
+    });
+</script>
+
+</body>
+</html>
