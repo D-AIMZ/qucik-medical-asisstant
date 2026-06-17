@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Tests - MedicalAssist</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:#f0f4f8}
+        .top-bar{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:8px 0;font-size:13px}
+        .top-bar .container,.header .container,nav .container,.content-container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .top-bar .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+        .top-bar a{color:#fff;text-decoration:none}
+        .header{background:#fff;border-bottom:1px solid #e0e0e0;padding:10px 0}
+        .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0a5c36}
+        .logo img{height:36px}
+        .logo span{font-size:22px;font-weight:700}
+        .logo small{font-size:11px;color:#666;display:block}
+        nav{background:#fff;border-bottom:2px solid #0a5c36}
+        nav ul{list-style:none;display:flex;flex-wrap:wrap}
+        nav ul li a{display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;font-weight:500}
+        nav ul li a:hover,nav ul li a.active{background:#0a5c36;color:#fff}
+        .mobile-menu-btn{display:none;background:none;border:none;font-size:28px;cursor:pointer;padding:8px}
+        .page-header{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:35px 0;text-align:center}
+        .page-header h1{font-size:clamp(24px,5vw,36px);margin-bottom:8px}
+        .page-header p{font-size:clamp(14px,2.5vw,16px);opacity:0.9}
+        .breadcrumb{background:#fff;padding:10px 0;border-bottom:1px solid #e0e0e0;font-size:13px}
+        .breadcrumb a{color:#0a5c36;text-decoration:none}
+        .breadcrumb span{color:#999}
+        .tests-section{padding:30px 0}
+        .search-bar{display:flex;gap:10px;margin-bottom:25px;flex-wrap:wrap}
+        .search-bar input{flex:1;padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-size:14px;min-width:200px}
+        .search-bar input:focus{outline:none;border-color:#0a5c36}
+        .search-bar select{padding:12px 16px;border:1px solid #ddd;border-radius:8px;font-size:14px;background:#fff}
+        .tests-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+        .test-card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.05);display:flex;gap:15px;transition:transform 0.2s}
+        .test-card:hover{transform:translateY(-3px)}
+        .test-icon{font-size:36px;min-width:50px;text-align:center}
+        .test-info{flex:1}
+        .test-info h3{font-size:15px;color:#333;margin-bottom:4px}
+        .test-info .desc{font-size:12px;color:#999;margin-bottom:6px;line-height:1.4}
+        .test-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;flex-wrap:wrap;gap:8px}
+        .test-price{font-size:16px;font-weight:700;color:#0a5c36}
+        .test-prep{font-size:11px;color:#e67e22;background:#fff8e1;padding:2px 8px;border-radius:4px}
+        .book-btn{padding:6px 16px;background:#0a5c36;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+        .book-btn:hover{background:#0d7a4a}
+        .category-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+        .cat-tab{padding:8px 18px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:13px;transition:all 0.2s}
+        .cat-tab:hover,.cat-tab.active{background:#0a5c36;color:#fff;border-color:#0a5c36}
+        footer{background:#0a5c36;color:#fff;padding:30px 0 15px;margin-top:40px}
+        footer .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px}
+        footer h4{font-size:16px;margin-bottom:12px;color:#81c784}
+        footer ul{list-style:none}
+        footer ul li a{color:#ccc;text-decoration:none;font-size:13px}
+        footer ul li a:hover{color:#fff}
+        .footer-bottom{text-align:center;padding-top:15px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;color:#aaa;margin-top:20px}
+        @media(max-width:768px){
+            .mobile-menu-btn{display:block}
+            nav ul{display:none;flex-direction:column;width:100%}
+            nav ul.show{display:flex}
+            .tests-grid{grid-template-columns:1fr}
+            .search-bar{flex-direction:column}
+        }
+        @media(max-width:480px){
+            .header .container{flex-direction:column;text-align:center}
+            .test-card{flex-direction:column;text-align:center}
+            .test-meta{flex-direction:column}
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="container"><span>📞 +256 700 123 456 | ✉️ info@medicalassist.ug</span><div><a href="signin.html">Sign In</a></div></div></div>
+    <div class="header"><div class="container">
+        <a href="index.html" class="logo"><img src="images/w3cert.gif" alt="MedicalAssist" onerror="this.parentElement.innerHTML='<span style=font-size:28px>🏥</span>'"><div><span>MedicalAssist</span><small>Your Health, Our Priority</small></div></a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
+    </div></div>
+    <nav><div class="container"><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="online-pharmacy.html">Pharmacy</a></li>
+        <li><a href="doctor-consultation.html">Doctors</a></li>
+        <li><a href="lab-tests.html" class="active">Lab Tests</a></li>
+    </ul></div></nav>
+    <div class="page-header"><h1>🔬 Lab Tests & Diagnostics</h1><p>Book lab tests from accredited Ugandan laboratories</p></div>
+    <div class="breadcrumb"><div class="container"><a href="index.html">Home</a> / <span>Lab Tests</span></div></div>
+    <section class="tests-section"><div class="content-container">
+        <div class="search-bar">
+            <input type="text" id="testSearch" placeholder="Search for a test..." oninput="filterTests()">
+            <select id="catFilter" onchange="filterTests()">
+                <option value="all">All Categories</option>
+                <option value="blood">Blood Tests</option>
+                <option value="urine">Urine Tests</option>
+                <option value="imaging">Imaging</option>
+                <option value="cardiac">Cardiac</option>
+                <option value="infectious">Infectious Diseases</option>
+                <option value="hormone">Hormone Tests</option>
+            </select>
+        </div>
+        <div class="category-tabs" id="catTabs">
+            <div class="cat-tab active" data-cat="all" onclick="setCategory('all')">All</div>
+            <div class="cat-tab" data-cat="blood" onclick="setCategory('blood')">🩸 Blood</div>
+            <div class="cat-tab" data-cat="urine" onclick="setCategory('urine')">💧 Urine</div>
+            <div class="cat-tab" data-cat="imaging" onclick="setCategory('imaging')">🖼️ Imaging</div>
+            <div class="cat-tab" data-cat="cardiac" onclick="setCategory('cardiac')">❤️ Cardiac</div>
+            <div class="cat-tab" data-cat="infectious" onclick="setCategory('infectious')">🦠 Infectious</div>
+            <div class="cat-tab" data-cat="hormone" onclick="setCategory('hormone')">🧬 Hormone</div>
+        </div>
+        <div class="tests-grid" id="testsGrid"></div>
+    </div></section>
+    <footer><div class="container">
+        <div class="footer-grid">
+            <div><h4>MedicalAssist</h4><p style="font-size:13px;color:#ccc;">Your trusted healthcare partner in Uganda.</p></div>
+            <div><h4>Quick Links</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div><h4>Services</h4><ul><li><a href="doctor-consultation.html">Consultation</a></li><li><a href="online-pharmacy.html">Pharmacy</a></li><li><a href="subscriptions.html">Subscriptions</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">© 2026 MedicalAssist. All rights reserved.</div>
+    </div></footer>
+    <script>
+        const tests = [
+            {name:'Complete Blood Count (CBC)',icon:'🩸',cat:'blood',price:'25,000',prep:'Fasting 8hrs',desc:'Measures red/white blood cells, hemoglobin, platelets'},
+            {name:'Malaria Test',icon:'🦟',cat:'infectious',price:'15,000',prep:'No special prep',desc:'Rapid diagnostic test for malaria parasites'},
+            {name:'Blood Glucose Test',icon:'🍬',cat:'blood',price:'12,000',prep:'Fasting 8hrs',desc:'Measures blood sugar levels for diabetes screening'},
+            {name:'Urinalysis',icon:'💧',cat:'urine',price:'10,000',prep:'Mid-stream sample',desc:'Comprehensive urine analysis for infections & kidney function'},
+            {name:'Chest X-Ray',icon:'🫁',cat:'imaging',price:'50,000',prep:'No special prep',desc:'Chest radiograph for lung & heart assessment'},
+            {name:'Abdominal Ultrasound',icon:'🖼️',cat:'imaging',price:'80,000',prep:'Fasting 6hrs',desc:'Ultrasound of liver, kidneys, spleen & pancreas'},
+            {name:'ECG/EKG',icon:'❤️',cat:'cardiac',price:'35,000',prep:'No special prep',desc:'Electrocardiogram for heart rhythm assessment'},
+            {name:'Lipid Profile',icon:'🫀',cat:'cardiac',price:'30,000',prep:'Fasting 12hrs',desc:'Cholesterol, HDL, LDL, triglycerides measurement'},
+            {name:'HIV Test',icon:'🧪',cat:'infectious',price:'10,000',prep:'No special prep',desc:'Rapid HIV screening test (confidential)'},
+            {name:'Thyroid Function Test',icon:'🧬',cat:'hormone',price:'45,000',prep:'No special prep',desc:'TSH, T3, T4 levels for thyroid assessment'},
+            {name:'Pregnancy Test',icon:'🤰',cat:'urine',price:'8,000',prep:'First morning urine',desc:'Urine hCG pregnancy test'},
+            {name:'Liver Function Test',icon:'🫁',cat:'blood',price:'35,000',prep:'Fasting 8hrs',desc:'ALT, AST, ALP, bilirubin & protein levels'},
+            {name:'Kidney Function Test',icon:'🫘',cat:'blood',price:'30,000',prep:'Fasting 8hrs',desc:'Creatinine, BUN, electrolyte assessment'},
+            {name:'Typhoid Test (Widal)',icon:'🦠',cat:'infectious',price:'20,000',prep:'No special prep',desc:'Widal test for typhoid fever detection'},
+            {name:'Hepatitis B Test',icon:'🦠',cat:'infectious',price:'25,000',prep:'No special prep',desc:'HBsAg screening for Hepatitis B'},
+            {name:'Vitamin D Test',icon:'☀️',cat:'hormone',price:'60,000',prep:'No special prep',desc:'25-hydroxy Vitamin D level measurement'},
+            {name:'PSA Test (Prostate)',icon:'🧬',cat:'hormone',price:'50,000',prep:'No special prep',desc:'Prostate-specific antigen for prostate health'},
+            {name:'Stool Analysis',icon:'💩',cat:'infectious',price:'12,000',prep:'Fresh sample',desc:'Stool microscopy for parasites & infections'}
+        ];
+        let currentCat = 'all';
+        function renderTests() {
+            const search = document.getElementById('testSearch').value.toLowerCase();
+            const filtered = tests.filter(t => {
+                const matchCat = currentCat === 'all' || t.cat === currentCat;
+                const matchSearch = t.name.toLowerCase().includes(search) || t.desc.toLowerCase().includes(search);
+                return matchCat && matchSearch;
+            });
+            document.getElementById('testsGrid').innerHTML = filtered.length ? filtered.map(t => `
+                <div class="test-card">
+                    <div class="test-icon">${t.icon}</div>
+                    <div class="test-info">
+                        <h3>${t.name}</h3>
+                        <div class="desc">${t.desc}</div>
+                        <div style="font-size:11px;color:#0a5c36;background:#e8f5e9;display:inline-block;padding:2px 8px;border-radius:4px;margin-top:4px;">${t.cat.charAt(0).toUpperCase()+t.cat.slice(1)}</div>
+                        <div class="test-meta">
+                            <span class="test-price">UGX ${t.price}</span>
+                            ${t.prep ? `<span class="test-prep">⚠️ ${t.prep}</span>` : ''}
+                            <button class="book-btn" onclick="bookTest('${t.name}','${t.price}')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('') : '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;">No tests found matching your search.</div>';
+        }
+        function setCategory(cat) {
+            currentCat = cat;
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+            document.getElementById('catFilter').value = cat;
+            renderTests();
+        }
+        function filterTests() {
+            currentCat = document.getElementById('catFilter').value;
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === currentCat));
+            renderTests();
+        }
+        function bookTest(name, price) {
+            if (confirm(`Book "${name}" for UGX ${price}?`)) {
+                let bookings = JSON.parse(localStorage.getItem('labBookings')) || [];
+                bookings.push({ test: name, price: price, date: new Date().toLocaleDateString(), status: 'Pending' });
+                localStorage.setItem('labBookings', JSON.stringify(bookings));
+                alert('✅ Test booked! We will contact you to schedule an appointment.');
+            }
+        }
+        renderTests();
+    </script>
+</body>
+</html>
