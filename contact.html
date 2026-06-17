@@ -103,3 +103,33 @@
         </div>
         <div class="contact-form">
             <h2>✉️ Send Us a Message</h2>
+<div class="contact-form">
+            <h2>✉️ Send Us a Message</h2>
+            <form action="https://formspree.io/f/your-form-id" method="POST">
+                <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+                    <div class="form-group"><label>Your Name <span style="color:#e74c3c;">*</span></label><input type="text" name="name" placeholder="John Doe" required></div>
+                    <div class="form-group"><label>Your Email <span style="color:#e74c3c;">*</span></label><input type="email" name="email" placeholder="john@example.com" required></div>
+                </div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="+256 700 000 000"></div>
+                <div class="form-group"><label>Subject</label><select name="subject">
+                    <option>General Inquiry</option>
+                    <option>Order Support</option>
+                    <option>Medical Question</option>
+                    <option>Partnership</option>
+                    <option>Complaint</option>
+                    <option>Other</option>
+                </select></div>
+                <div class="form-group"><label>Message <span style="color:#e74c3c;">*</span></label><textarea name="message" placeholder="How can we help you?" required></textarea></div>
+                <button type="submit" class="submit-btn">Send Message ✉️</button>
+            </form>
+            <p style="font-size:11px;color:#999;margin-top:10px;">We'll respond within 24 hours. For urgent matters, please call us.</p>
+        </div>
+    </div></section>
+    
+    <section class="map-section"><div class="contact-container" style="grid-template-columns:1fr;">
+        <div class="map-placeholder">📍 Map: Kampala Road, Kampala, Uganda</div>
+    </div></section>
+    
+    <footer>...</footer>
+</body>
+</html>
