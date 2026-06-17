@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - MedicalAssist</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:#f0f4f8}
+        .top-bar{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:8px 0;font-size:13px}
+        .top-bar .container,.header .container,nav .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .top-bar .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+        .top-bar a{color:#fff;text-decoration:none}
+        .header{background:#fff;border-bottom:1px solid #e0e0e0;padding:10px 0}
+        .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0a5c36}
+        .logo img{height:36px}
+        .logo span{font-size:22px;font-weight:700}
+        .logo small{font-size:11px;color:#666;display:block}
+        nav{background:#fff;border-bottom:2px solid #0a5c36}
+        nav ul{list-style:none;display:flex;flex-wrap:wrap}
+        nav ul li a{display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;font-weight:500}
+        nav ul li a:hover{background:#0a5c36;color:#fff}
+        .mobile-menu-btn{display:none;background:none;border:none;font-size:28px;cursor:pointer;padding:8px}
+        .page-header{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:35px 0;text-align:center}
+        .page-header h1{font-size:clamp(24px,5vw,36px);margin-bottom:8px}
+        .page-header p{font-size:clamp(14px,2.5vw,16px);opacity:0.9}
+        .breadcrumb{background:#fff;padding:10px 0;border-bottom:1px solid #e0e0e0;font-size:13px;max-width:1200px;margin:0 auto;padding:10px 15px}
+        .faq-section{padding:30px 0}
+        .faq-container{max-width:850px;margin:0 auto;padding:0 15px}
+        .faq-category{margin-bottom:30px}
+        .faq-category h2{font-size:20px;color:#0a5c36;margin-bottom:15px;padding-bottom:8px;border-bottom:2px solid #e8f5e9}
+        .faq-item{background:#fff;border-radius:8px;margin-bottom:8px;box-shadow:0 1px 5px rgba(0,0,0,0.04);overflow:hidden}
+        .faq-q{padding:14px 18px;font-weight:600;color:#333;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:14px;transition:background 0.2s}
+        .faq-q:hover{background:#f9f9f9}
+        .faq-q::after{content:'▼';font-size:11px;color:#999;transition:transform 0.2s}
+        .faq-q.open::after{transform:rotate(180deg)}
+        .faq-a{display:none;padding:0 18px 14px;color:#666;font-size:14px;line-height:1.7}
+        .faq-a.show{display:block}
+        .faq-search{margin-bottom:25px}
+        .faq-search input{width:100%;padding:12px 18px;border:1px solid #ddd;border-radius:8px;font-size:15px}
+        .faq-search input:focus{outline:none;border-color:#0a5c36;box-shadow:0 0 0 3px rgba(10,92,54,0.1)}
+        footer{background:#0a5c36;color:#fff;padding:30px 0 15px;margin-top:40px}
+        footer .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px}
+        footer h4{font-size:16px;margin-bottom:12px;color:#81c784}
+        footer ul{list-style:none}
+        footer ul li a{color:#ccc;text-decoration:none;font-size:13px}
+        .footer-bottom{text-align:center;padding-top:15px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;color:#aaa;margin-top:20px}
+        @media(max-width:768px){
+            .mobile-menu-btn{display:block}
+            nav ul{display:none;flex-direction:column;width:100%}
+            nav ul.show{display:flex}
+        }
+        @media(max-width:480px){.header .container{flex-direction:column;text-align:center}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="container"><span>📞 +256 700 123 456 | ✉️ info@medicalassist.ug</span><div><a href="signin.html">Sign In</a></div></div></div>
+    <div class="header"><div class="container">
+        <a href="index.html" class="logo"><img src="images/w3cert.gif" alt="MedicalAssist" onerror="this.parentElement.innerHTML='<span style=font-size:28px>🏥</span>'"><div><span>MedicalAssist</span><small>Your Health, Our Priority</small></div></a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
+    </div></div>
+    <nav><div class="container"><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+    </ul></div></nav>
+    <div class="page-header"><h1>❓ Frequently Asked Questions</h1><p>Find answers to common questions about MedicalAssist</p></div>
+    <div class="breadcrumb" style="max-width:1200px;margin:0 auto;padding:10px 15px;"><a href="index.html">Home</a> / <span>FAQ</span></div>
+    
+    <section class="faq-section"><div class="faq-container">
+        <div class="faq-search"><input type="text" id="faqSearch" placeholder="Search FAQ..." onkeyup="searchFaq()"></div>
+        
+        <div class="faq-category" data-cat="orders">
+            <h2>📦 Orders & Delivery</h2>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does delivery take?</div><div class="faq-a">Kampala deliveries arrive within 24 hours. Upcountry deliveries take 2-3 business days. Express delivery available within 2 hours in Kampala.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What are the delivery charges?</div><div class="faq-a">Free delivery in Kampala for orders above UGX 50,000. Standard delivery fee is UGX 5,000 within Kampala and UGX 10,000 upcountry.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I track my order?</div><div class="faq-a">Yes! Check your order status in your account dashboard under "My Orders". You'll also receive SMS updates.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if I'm not home for delivery?</div><div class="faq-a">Our delivery agent will call you. You can reschedule or authorize a neighbour to receive the package.</div></div>
+        </div>
+        
+        <div class="faq-category" data-cat="pharmacy">
+            <h2>💊 Pharmacy & Medicines</h2>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I need a prescription?</div><div class="faq-a">Over-the-counter (OTC) medicines can be purchased without a prescription. Prescription drugs require a valid prescription from a licensed doctor. You can upload it during checkout.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are your medicines genuine?</div><div class="faq-a">100%. All medicines are sourced from NDA-approved suppliers and pharmacies in Uganda. We guarantee authenticity.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I return medicines?</div><div class="faq-a">For hygiene and safety reasons, medicines cannot be returned once dispatched. Contact us immediately if you receive damaged goods.</div></div>
+        </div>
+        
+        <div class="faq-category" data-cat="doctors">
+            <h2>👨‍⚕️ Doctor Consultations</h2>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do consultations work?</div><div class="faq-a">Select your consultation type, choose a doctor, pick a time slot, and complete payment. You'll receive a confirmation with a link to join the video/audio call.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are the doctors licensed?</div><div class="faq-a">Yes, all doctors are licensed by the Uganda Medical and Dental Practitioners Council (UMDPC) with active practicing certificates.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I get a prescription online?</div><div class="faq-a">Yes, our doctors can issue electronic prescriptions during consultations, which you can use to order from our pharmacy.</div></div>
+        </div>
+        
+        <div class="faq-category" data-cat="payment">
+            <h2>💳 Payment</h2>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?</div><div class="faq-a">We accept MTN Mobile Money, Airtel Money, Visa/Mastercard, and bank transfers. Cash on delivery is available in select areas.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is my payment secure?</div><div class="faq-a">Absolutely. All payments are processed through encrypted, secure channels. We do not store your payment details.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do promo codes work?</div><div class="faq-a">Enter your promo code at checkout. Valid codes include MEDICAL10 for 10% off your order. Terms apply.</div></div>
+        </div>
+    </div></section>
+    
+    <footer>...</footer>
+    
+    <script>
+        function toggleFaq(el) {
+            el.classList.toggle('open');
+            el.nextElementSibling.classList.toggle('show');
+        }
+        function searchFaq() {
+            const q = document.getElementById('faqSearch').value.toLowerCase();
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(q) ? '' : 'none';
+            });
+            document.querySelectorAll('.faq-category').forEach(cat => {
+                const visible = [...cat.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
+                cat.style.display = visible ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
