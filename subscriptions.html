@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriptions - MedicalAssist</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:#f0f4f8}
+        .top-bar{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:8px 0;font-size:13px}
+        .top-bar .container,.header .container,nav .container,.content-container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .top-bar .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+        .top-bar a{color:#fff;text-decoration:none}
+        .header{background:#fff;border-bottom:1px solid #e0e0e0;padding:10px 0}
+        .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0a5c36}
+        .logo img{height:36px}
+        .logo span{font-size:22px;font-weight:700}
+        .logo small{font-size:11px;color:#666;display:block}
+        nav{background:#fff;border-bottom:2px solid #0a5c36}
+        nav ul{list-style:none;display:flex;flex-wrap:wrap}
+        nav ul li a{display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;font-weight:500}
+        nav ul li a:hover,nav ul li a.active{background:#0a5c36;color:#fff}
+        .mobile-menu-btn{display:none;background:none;border:none;font-size:28px;cursor:pointer;padding:8px}
+        .page-header{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:35px 0;text-align:center}
+        .page-header h1{font-size:clamp(24px,5vw,36px);margin-bottom:8px}
+        .page-header p{font-size:clamp(14px,2.5vw,16px);opacity:0.9}
+        .breadcrumb{background:#fff;padding:10px 0;border-bottom:1px solid #e0e0e0;font-size:13px}
+        .breadcrumb a{color:#0a5c36;text-decoration:none}
+        .breadcrumb span{color:#999}
+        .plans-section{padding:40px 0}
+        .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+        .plan-card{background:#fff;border-radius:12px;padding:30px 25px;box-shadow:0 2px 20px rgba(0,0,0,0.06);text-align:center;position:relative;transition:transform 0.3s;border:2px solid transparent}
+        .plan-card:hover{transform:translateY(-5px)}
+        .plan-card.featured{border-color:#0a5c36;transform:scale(1.03)}
+        .plan-card.featured:hover{transform:scale(1.03) translateY(-5px)}
+        .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700}
+        .plan-icon{font-size:40px;margin-bottom:15px}
+        .plan-name{font-size:20px;font-weight:700;color:#333;margin-bottom:5px}
+        .plan-price{font-size:32px;font-weight:800;color:#0a5c36;margin:10px 0}
+        .plan-price small{font-size:14px;font-weight:400;color:#999}
+        .plan-desc{color:#666;font-size:14px;margin-bottom:15px;line-height:1.5}
+        .plan-features{list-style:none;text-align:left;margin:15px 0}
+        .plan-features li{padding:6px 0;font-size:13px;color:#555;display:flex;align-items:center;gap:8px}
+        .plan-features li::before{content:'✓';color:#0a5c36;font-weight:700}
+        .plan-btn{width:100%;padding:12px;border:2px solid #0a5c36;border-radius:8px;background:transparent;color:#0a5c36;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.3s}
+        .plan-btn:hover{background:#0a5c36;color:#fff}
+        .plan-btn.featured-btn{background:#0a5c36;color:#fff}
+        .plan-btn.featured-btn:hover{background:#0d7a4a}
+        .faq-section{padding:40px 0}
+        .faq-section h2{text-align:center;font-size:28px;color:#0a5c36;margin-bottom:25px}
+        .faq-item{background:#fff;border-radius:8px;margin-bottom:10px;padding:15px 20px;box-shadow:0 1px 5px rgba(0,0,0,0.04)}
+        .faq-q{font-weight:600;color:#333;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-q::after{content:'▼';font-size:12px;color:#999;transition:transform 0.2s}
+        .faq-q.open::after{transform:rotate(180deg)}
+        .faq-a{display:none;padding-top:10px;color:#666;font-size:14px;line-height:1.6}
+        .faq-a.show{display:block}
+        footer{background:#0a5c36;color:#fff;padding:30px 0 15px;margin-top:40px}
+        footer .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px}
+        footer h4{font-size:16px;margin-bottom:12px;color:#81c784}
+        footer ul{list-style:none}
+        footer ul li a{color:#ccc;text-decoration:none;font-size:13px}
+        footer ul li a:hover{color:#fff}
+        .footer-bottom{text-align:center;padding-top:15px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;color:#aaa;margin-top:20px}
+        @media(max-width:768px){
+            .mobile-menu-btn{display:block}
+            nav ul{display:none;flex-direction:column;width:100%}
+            nav ul.show{display:flex}
+            .plan-card.featured{transform:none}
+            .plan-card.featured:hover{transform:translateY(-5px)}
+        }
+        @media(max-width:480px){
+            .header .container{flex-direction:column;text-align:center}
+            .plans-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="container"><span>📞 +256 700 123 456 | ✉️ info@medicalassist.ug</span><div><a href="signin.html">Sign In</a></div></div></div>
+    <div class="header"><div class="container">
+        <a href="index.html" class="logo"><img src="images/w3cert.gif" alt="MedicalAssist" onerror="this.parentElement.innerHTML='<span style=font-size:28px>🏥</span>'"><div><span>MedicalAssist</span><small>Your Health, Our Priority</small></div></a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
+    </div></div>
+    <nav><div class="container"><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="online-pharmacy.html">Pharmacy</a></li>
+        <li><a href="doctor-consultation.html">Doctors</a></li>
+        <li><a href="lab-tests.html">Lab Tests</a></li>
+        <li><a href="subscriptions.html" class="active">Subscriptions</a></li>
+    </ul></div></nav>
+    <div class="page-header"><h1>📦 Subscription Plans</h1><p>Save money on your regular medications & health needs</p></div>
+    <div class="breadcrumb"><div class="container"><a href="index.html">Home</a> / <span>Subscriptions</span></div></div>
+    <section class="plans-section"><div class="content-container"><div class="plans-grid" id="plansGrid"></div></div></section>
+    <section class="faq-section"><div class="content-container">
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do subscriptions work?</div><div class="faq-a">Choose a plan, select your medications, and we'll deliver them to your door on a regular schedule. You can pause or cancel anytime.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I change my subscription plan?</div><div class="faq-a">Yes! You can upgrade or downgrade your plan at any time. Changes take effect from your next billing cycle.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a delivery fee?</div><div class="faq-a">Free delivery within Kampala for all plans. A small fee applies for upcountry deliveries.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I cancel anytime?</div><div class="faq-a">Absolutely. No cancellation fees. Your subscription continues until the end of the current billing period.</div></div>
+    </div></section>
+    <footer><div class="container">
+        <div class="footer-grid">
+            <div><h4>MedicalAssist</h4><p style="font-size:13px;color:#ccc;">Your trusted healthcare partner in Uganda.</p></div>
+            <div><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div><h4>Services</h4><ul><li><a href="doctor-consultation.html">Consultation</a></li><li><a href="online-pharmacy.html">Pharmacy</a></li><li><a href="lab-tests.html">Lab Tests</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">© 2026 MedicalAssist. All rights reserved.</div>
+    </div></footer>
+    <script>
+        const plans = [
+            {name:'Basic',price:'45,000',icon:'💊',desc:'Essential medications delivered monthly',features:['5 regular medications','Monthly delivery','Email support','Free delivery (Kampala)'],featured:false},
+            {name:'Standard',price:'85,000',icon:'💪',desc:'Comprehensive health coverage with extras',features:['10 regular medications','Bi-weekly delivery','Priority email & phone','Free delivery (Kampala)','10% off extra orders','Health tips newsletter'],featured:true},
+            {name:'Premium',price:'150,000',icon:'👑',desc:'Complete healthcare peace of mind',features:['Unlimited medications','Weekly delivery','24/7 priority support','Free delivery nationwide','20% off extra orders','Free consultations','Lab test discounts','Family coverage'],featured:false}
+        ];
+        document.getElementById('plansGrid').innerHTML = plans.map((p,i) => `
+            <div class="plan-card ${p.featured?'featured':''}">
+                ${p.featured?'<div class="plan-badge">🔥 Most Popular</div>':''}
+                <div class="plan-icon">${p.icon}</div>
+                <div class="plan-name">${p.name}</div>
+                <div class="plan-price">UGX ${p.price}<small>/month</small></div>
+                <div class="plan-desc">${p.desc}</div>
+                <ul class="plan-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
+                <button class="plan-btn ${p.featured?'featured-btn':''}" onclick="subscribe('${p.name}')">Subscribe Now</button>
+            </div>
+        `).join('');
+        function subscribe(plan) {
+            if (confirm(`Subscribe to the ${plan} plan?`)) {
+                alert(`✅ You've subscribed to the ${plan} plan! Welcome to MedicalAssist subscriptions.`);
+            }
+        }
+        function toggleFaq(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('show'); }
+    </script>
+</body>
+</html>
