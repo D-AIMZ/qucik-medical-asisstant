@@ -98,6 +98,17 @@
     </style>
 </head>
 <body>
+    <div class="page-header">
+    <h1>⏰ Emergency Contraception</h1>
+    <p>Morning-after pills — available without prescription, discreet packaging</p>
+</div>
+    <div class="cat-header" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">
+    <div class="ch-icon">⏰</div>
+    <div class="ch-text">
+        <h2>Emergency Contraception (Morning-After Pill)</h2>
+        <p>When your regular contraception fails or you had unprotected sex, emergency contraception can help. These pills are <strong>available without a prescription</strong> — we ship in discreet packaging. For best effectiveness, take within 72 hours (3 days). EllaOne works up to 120 hours (5 days). <strong>This is not for regular use.</strong></p>
+    </div>
+</div>
     <div class="top-bar">
         <div class="container">
             <span>📞 +256 700 123 456 | ✉️ info@medicalassist.ug</span>
@@ -196,59 +207,27 @@
 
     <script>
         const allProducts = [
-            // Fat Burners (cat: fat-burner)
-            {name:'Hydroxycut Hardcore Elite 110 caps',cat:'fat-burner',desc:'Clinical strength thermogenic, energy & metabolism boost',price:120000,oldPrice:140000,rating:4.6,popular:98,badge:'Popular',img:'hydroxycut.jpg'},
-            {name:'Lipo-6 Black 60 caps',cat:'fat-burner',desc:'Liquid capsule technology, rapid fat burning',price:120000,oldPrice:0,rating:4.5,popular:85,badge:'',img:'lipo6.jpg'},
-            {name:'CLA 1000mg 90 softgels',cat:'fat-burner',desc:'Conjugated Linoleic Acid, reduces body fat storage',price:45000,oldPrice:55000,rating:4.3,popular:92,badge:'Hot',img:'cla-1000.jpg'},
-            {name:'The Ripper Fat Burner 30 servings',cat:'fat-burner',desc:'Advanced thermogenic powder, sour candy flavour',price:130000,oldPrice:150000,rating:4.4,popular:65,badge:'',img:'ripper.jpg'},
-            {name:'Nutrex Lipo-6 Black Ultra 60 caps',cat:'fat-burner',desc:'Maximum strength with rauwolfia canescens',price:135000,oldPrice:0,rating:4.5,popular:72,badge:'',img:'lipo6-ultra.jpg'},
-            {name:'Cellucor Super HD 60 caps',cat:'fat-burner',desc:'Multi-pathway fat burner, energy & focus',price:95000,oldPrice:0,rating:4.2,popular:55,badge:'',img:'super-hd.jpg'},
-            {name:'Burn XT Thermogenic 80 caps',cat:'fat-burner',desc:'Natural thermogenic with green tea, cayenne & L-carnitine',price:65000,oldPrice:75000,rating:4.1,popular:48,badge:'Sale',img:'burn-xt.jpg'},
-            {name:'Hydroxycut Hardcore Next Gen 100 caps',cat:'fat-burner',desc:'Next generation thermogenic, caffeine + herbal matrix',price:130000,oldPrice:0,rating:4.4,popular:60,badge:'',img:'hydroxycut-next.jpg'},
+    // Levonorgestrel-based
+    {name:'Postinor-2 1.5mg single dose',cat:'levonorgestrel',desc:'One tablet, take within 72 hours, 95% effective',price:10000,oldPrice:0,rating:4.3,popular:120,badge:'Bestseller',img:'postinor.jpg'},
+    {name:'NorLevo 1.5mg single dose',cat:'levonorgestrel',desc:'One tablet emergency contraceptive, 72 hours',price:12000,oldPrice:15000,rating:4.2,popular:95,badge:'',img:'norlevo.jpg'},
+    {name:'Escapelle 1.5mg single dose',cat:'levonorgestrel',desc:'Single dose, up to 72 hours effectiveness',price:11000,oldPrice:0,rating:4.1,popular:88,badge:'',img:'escapelle.jpg'},
+    {name:'Levogynon 0.75mg 2 tablets',cat:'levonorgestrel',desc:'Two-dose regimen: take both within 72 hours',price:8000,oldPrice:0,rating:4.0,popular:75,badge:'Budget',img:'levogynon.jpg'},
+    {name:'Microlut Emergency 28 tablets',cat:'levonorgestrel',desc:'Mini-pill used for emergency (multiple doses required)',price:14000,oldPrice:0,rating:3.8,popular:35,badge:'',img:'microlut-em.jpg'},
+    {name:'Levonorgestrel 1.5mg Generic',cat:'levonorgestrel',desc:'Generic emergency contraceptive, single dose',price:8000,oldPrice:0,rating:4.0,popular:60,badge:'Value',img:'levonorgestrel-gen.jpg'},
 
-            // Appetite Suppressants (cat: appetite)
-            {name:'Garcinia Cambogia 1000mg 60 caps',cat:'appetite',desc:'Natural appetite suppressant, blocks fat production',price:30000,oldPrice:38000,rating:4.2,popular:88,badge:'Bestseller',img:'garcinia.jpg'},
-            {name:'Glucomannan Fiber 500mg 90 caps',cat:'appetite',desc:'Konjac fiber expands in stomach, reduces hunger',price:28000,oldPrice:0,rating:4.1,popular:75,badge:'',img:'glucomannan.jpg'},
-            {name:'Green Coffee Bean Extract 800mg 60 caps',cat:'appetite',desc:'Chlorogenic acid for appetite & metabolism support',price:32000,oldPrice:0,rating:4.0,popular:62,badge:'',img:'green-coffee.jpg'},
-            {name:'5-HTP 100mg 60 caps',cat:'appetite',desc:'Serotonin precursor, mood & appetite regulation',price:35000,oldPrice:0,rating:4.3,popular:45,badge:'',img:'5htp.jpg'},
-            {name:'Apple Cider Vinegar Capsules 500mg 90 caps',cat:'appetite',desc:'Convenient ACV, appetite control & digestion',price:22000,oldPrice:0,rating:4.1,popular:58,badge:'',img:'acv-caps.jpg'},
-            {name:'Caralluma Fimbriata 500mg 60 caps',cat:'appetite',desc:'Traditional Indian appetite suppressant cactus',price:25000,oldPrice:0,rating:3.9,popular:35,badge:'',img:'caralluma.jpg'},
+    // Ulipristal Acetate
+    {name:'EllaOne 30mg single dose',cat:'ulipristal',desc:'Prescription-free, works up to 120 hours (5 days)',price:35000,oldPrice:40000,rating:4.6,popular:85,badge:'Extended Window',img:'ellaone.jpg'},
+    {name:'Ulipristal Acetate 30mg',cat:'ulipristal',desc:'Generic ellaOne, 120-hour emergency contraception',price:30000,oldPrice:0,rating:4.4,popular:55,badge:'',img:'ulipristal.jpg'},
 
-            // Slimming Teas (cat: tea)
-            {name:'Flat Tummy Tea 28 day detox',cat:'tea',desc:'Herbal tea blend for bloating & weight management',price:85000,oldPrice:95000,rating:4.4,popular:90,badge:'Popular',img:'flat-tummy-tea.jpg'},
-            {name:'Fit Tea 28 Day Slimming',cat:'tea',desc:'Green tea, oolong & herbs for metabolism boost',price:95000,oldPrice:110000,rating:4.3,popular:78,badge:'',img:'fit-tea.jpg'},
-            {name:'Matcha Green Tea Powder 100g',cat:'tea',desc:'Premium ceremonial grade, antioxidants & metabolism',price:38000,oldPrice:0,rating:4.5,popular:66,badge:'',img:'matcha-powder.jpg'},
-            {name:'Detox Flat Tummy Tea 14 bags',cat:'tea',desc:'Natural diuretic, reduces bloating & water retention',price:50000,oldPrice:0,rating:4.0,popular:72,badge:'',img:'detox-tea.jpg'},
-            {name:'Green Tea Fat Burner 60 caps',cat:'tea',desc:'EGCG rich green tea extract for thermogenesis',price:25000,oldPrice:0,rating:4.2,popular:55,badge:'',img:'green-tea-fat.jpg'},
-            {name:'Slimming Herbal Tea 30 bags',cat:'tea',desc:'Senna, fennel, dandelion & licorice blend',price:35000,oldPrice:0,rating:4.1,popular:42,badge:'',img:'slimming-herbal.jpg'},
-            {name:'Yerba Mate Loose Leaf 250g',cat:'tea',desc:'South American energy tea, metabolism & focus',price:28000,oldPrice:0,rating:4.0,popular:38,badge:'',img:'yerba-mate.jpg'},
+    // Copper IUD (Emergency)
+    {name:'Copper T IUD Emergency',cat:'iud',desc:'Non-hormonal IUD, effective up to 5 days post-unprotected sex',price:80000,oldPrice:0,rating:4.7,popular:40,badge:'Most Effective',img:'copper-t-em.jpg'},
 
-            // Detox & Cleanse (cat: detox)
-            {name:'Bio Slim Active Capsules 60\'s',cat:'detox',desc:'Herbal detox for weight loss & colon cleanse',price:45000,oldPrice:55000,rating:4.3,popular:95,badge:'Bestseller',img:'bioslim.jpg'},
-            {name:'Pezo Mega Weight Loss Capsules 30\'s',cat:'detox',desc:'Powerful herbal formula for rapid weight loss',price:95000,oldPrice:110000,rating:4.4,popular:82,badge:'Hot',img:'pezo-mega.jpg'},
-            {name:'Cider Trim Slimming 120 pills',cat:'detox',desc:'Apple cider + herbal detox for weight management',price:100000,oldPrice:0,rating:4.2,popular:60,badge:'',img:'cider-trim.jpg'},
-            {name:'Arwin Flat Tummy/Waistline 60 pills',cat:'detox',desc:'Targets stubborn belly fat, natural extracts',price:160000,oldPrice:180000,rating:4.1,popular:48,badge:'',img:'arwin-flat.jpg'},
-            {name:'7 Day Herbal Detox Program',cat:'detox',desc:'Complete 7-day cleanse kit with instructions',price:75000,oldPrice:0,rating:4.3,popular:55,badge:'',img:'7day-detox.jpg'},
-            {name:'Colon Cleanse Fiber 500mg 90 caps',cat:'detox',desc:'Psyllium husk & herbal blend for digestive cleanse',price:32000,oldPrice:0,rating:4.0,popular:40,badge:'',img:'colon-cleanse.jpg'},
-
-            // Meal Replacements (cat: meal)
-            {name:'Meal Replacement Shake Vanilla 500g',cat:'meal',desc:'Complete nutrition, 200 cal per serving, 20g protein',price:65000,oldPrice:75000,rating:4.5,popular:88,badge:'Popular',img:'meal-shake.jpg'},
-            {name:'Diet Protein Shake Chocolate 500g',cat:'meal',desc:'Low carb, high protein meal replacement, 180 cal',price:70000,oldPrice:0,rating:4.4,popular:72,badge:'',img:'diet-shake.jpg'},
-            {name:'Weight Loss Smoothie Mix Berry 400g',cat:'meal',desc:'Fruit & protein blend, 150 cal per serving',price:55000,oldPrice:0,rating:4.2,popular:58,badge:'',img:'smoothie-mix.jpg'},
-            {name:'Keto Meal Replacement 450g',cat:'meal',desc:'Keto-friendly, 2g net carbs, 25g protein',price:85000,oldPrice:95000,rating:4.3,popular:65,badge:'',img:'keto-meal.jpg'},
-            {name:'Oatmeal Diet Plan 1kg',cat:'meal',desc:'High fibre oatmeal, 7-day supply with recipes',price:25000,oldPrice:0,rating:4.0,popular:45,badge:'',img:'oatmeal-diet.jpg'},
-            {name:'Vegan Protein Shake Plant 500g',cat:'meal',desc:'Pea & rice protein, dairy-free, 22g protein',price:60000,oldPrice:0,rating:4.1,popular:35,badge:'',img:'vegan-shake.jpg'},
-
-            // Natural Herbal (cat: natural)
-            {name:'AB Slim Cellulose Capsules 60\'s',cat:'natural',desc:'Natural cellulose fiber, reduces hunger without diet',price:55000,oldPrice:65000,rating:4.2,popular:78,badge:'Popular',img:'ab-slim.jpg'},
-            {name:'Fukang Maglim Weight Loss 250mg 90 caps',cat:'natural',desc:'Traditional Chinese herbal weight loss formula',price:119000,oldPrice:165000,rating:4.1,popular:52,badge:'Sale',img:'fukang-maglim.jpg'},
-            {name:'Forever Garcinia Plus 60 tabs',cat:'natural',desc:'Forever Living brand, natural weight management',price:85000,oldPrice:0,rating:4.3,popular:68,badge:'',img:'forever-garcinia.jpg'},
-            {name:'Aloe Vera Juice 1L',cat:'natural',desc:'Pure aloe for digestion, detox & weight support',price:35000,oldPrice:0,rating:4.4,popular:95,badge:'',img:'aloe-juice.jpg'},
-            {name:'Apple Cider Vinegar 473mls',cat:'natural',desc:'Bragg organic ACV with mother',price:70000,oldPrice:0,rating:4.5,popular:88,badge:'Bestseller',img:'acv-bragg.jpg'},
-            {name:'Coconut Vinegar Organic 500ml',cat:'natural',desc:'Natural fermented coconut vinegar for weight management',price:60000,oldPrice:0,rating:4.0,popular:42,badge:'',img:'coconut-vinegar.jpg'},
-            {name:'Moringa Powder Organic 250g',cat:'natural',desc:'Superfood, nutrient dense, supports metabolism',price:25000,oldPrice:0,rating:4.3,popular:75,badge:'',img:'moringa-powder.jpg'},
-            {name:'Spirulina Tablets 500mg 200 tabs',cat:'natural',desc:'Blue-green algae, protein rich, appetite control',price:35000,oldPrice:0,rating:4.2,popular:65,badge:'',img:'spirulina.jpg'}
-        ];
+    // Kits & Accessories
+    {name:'Emergency Contraception Kit',cat:'kit',desc:'EllaOne + pregnancy test + condoms + info leaflet',price:45000,oldPrice:55000,rating:4.5,popular:70,badge:'Complete Kit',img:'em-con-kit.jpg'},
+    {name:'Pregnancy Test Combo',cat:'kit',desc:'2 pregnancy tests + emergency pill, discreet pack',price:20000,oldPrice:0,rating:4.3,popular:65,badge:'',img:'preg-combo.jpg'},
+    {name:'Morning After Pack',cat:'kit',desc:'Postinor-2 + emergency info + condoms',price:20000,oldPrice:0,rating:4.2,popular:58,badge:'',img:'morning-pack.jpg'},
+    {name:'Condoms 3 pack',cat:'kit',desc:'Premium condoms for added protection',price:5000,oldPrice:0,rating:4.1,popular:90,badge:'',img:'condoms-3.jpg'}
+];
 
         let currentPage = 1;
         const perPage = 12;
@@ -331,5 +310,16 @@
 
         renderProducts();
     </script>
+    <div class="info-banner" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">
+    <div class="ib-icon">⏰</div>
+    <div class="ib-text"><strong>Important:</strong> Emergency contraception should not be used as regular birth control. It is less effective than regular methods. If you need ongoing contraception, <a href="birth-control-pills.html" style="color:#0a5c36;font-weight:600;">browse our birth control pills</a> or <a href="doctor-consultation.html" style="color:#0a5c36;font-weight:600;">consult a doctor</a> for the best method for you.</div>
+</div>
+    <select id="catFilter" onchange="renderProducts()">
+    <option value="all">All Types</option>
+    <option value="levonorgestrel">Levonorgestrel (72hr)</option>
+    <option value="ulipristal">Ulipristal (120hr)</option>
+    <option value="iud">Copper IUD Emergency</option>
+    <option value="kit">Kits & Accessories</option>
+</select>
 </body>
 </html>
