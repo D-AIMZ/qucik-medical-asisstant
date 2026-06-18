@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Loss - MedicalAssist</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:#f0f4f8}
+        .top-bar{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:8px 0;font-size:13px}
+        .top-bar .container,.header .container,nav .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .top-bar .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+        .top-bar a{color:#fff;text-decoration:none}
+        .header{background:#fff;border-bottom:1px solid #e0e0e0;padding:10px 0}
+        .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0a5c36}
+        .logo img{height:36px}
+        .logo span{font-size:22px;font-weight:700}
+        .logo small{font-size:11px;color:#666;display:block}
+        .header-icons{display:flex;align-items:center;gap:12px}
+        .header-icons a{color:#333;text-decoration:none;font-size:13px;display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:6px}
+        .header-icons a:hover{background:#f0f4f8}
+        .header-icons .cart-count{background:#e74c3c;color:#fff;border-radius:50%;padding:1px 6px;font-size:11px;font-weight:700}
+        nav{background:#fff;border-bottom:2px solid #0a5c36}
+        nav ul{list-style:none;display:flex;flex-wrap:wrap}
+        nav ul li a{display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;font-weight:500}
+        nav ul li a:hover,nav ul li a.active{background:#0a5c36;color:#fff}
+        .mobile-menu-btn{display:none;background:none;border:none;font-size:28px;cursor:pointer;padding:8px;color:#333}
+        .page-header{background:linear-gradient(135deg,#0a5c36,#0d7a4a);color:#fff;padding:30px 0;text-align:center}
+        .page-header h1{font-size:clamp(22px,5vw,36px);margin-bottom:8px}
+        .page-header p{font-size:clamp(14px,2.5vw,16px);opacity:0.9}
+        .breadcrumb{background:#fff;padding:10px 0;border-bottom:1px solid #e0e0e0;font-size:13px}
+        .breadcrumb .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .breadcrumb a{color:#0a5c36;text-decoration:none}
+        .breadcrumb span{color:#999}
+        .cat-section{padding:30px 0}
+        .cat-container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .cat-header{background:linear-gradient(135deg,#fff8e1,#ffecb3);border-radius:12px;padding:20px 25px;margin-bottom:25px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+        .cat-header .ch-icon{font-size:48px}
+        .cat-header .ch-text h2{font-size:20px;color:#0a5c36;margin-bottom:5px}
+        .cat-header .ch-text p{font-size:13px;color:#555;line-height:1.5}
+        .cat-controls{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+        .cat-controls input{flex:1;padding:11px 16px;border:1px solid #ddd;border-radius:8px;font-size:14px;min-width:200px}
+        .cat-controls input:focus{outline:none;border-color:#0a5c36}
+        .cat-controls select{padding:11px 16px;border:1px solid #ddd;border-radius:8px;font-size:14px;background:#fff}
+        .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+        .product-card{background:#fff;border-radius:10px;padding:15px;box-shadow:0 2px 10px rgba(0,0,0,0.05);text-align:center;transition:transform 0.2s,box-shadow 0.2s;position:relative}
+        .product-card:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,0.1)}
+        .product-card .p-badge{position:absolute;top:8px;left:8px;background:#e74c3c;color:#fff;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700}
+        .product-card .p-sale{position:absolute;top:8px;right:8px;background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700}
+        .product-card img{width:100%;height:140px;object-fit:contain;margin-bottom:10px;border-radius:6px;background:#fafafa;padding:8px}
+        .product-card .p-name{font-size:14px;color:#333;margin-bottom:3px;font-weight:600;min-height:36px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .product-card .p-desc{font-size:11px;color:#999;margin-bottom:6px;min-height:30px}
+        .product-card .p-rating{font-size:12px;color:#f39c12;margin-bottom:4px}
+        .product-card .p-price{font-size:18px;font-weight:700;color:#0a5c36;margin-bottom:3px}
+        .product-card .p-old-price{font-size:12px;color:#999;text-decoration:line-through;margin-left:6px}
+        .product-card .p-free{font-size:11px;color:#0a5c36;margin-bottom:8px;font-weight:600}
+        .product-card .p-actions{display:flex;gap:6px}
+        .product-card .p-actions button{flex:1;padding:8px 4px;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s}
+        .product-card .add-cart{background:#0a5c36;color:#fff}
+        .product-card .add-cart:hover{background:#0d7a4a}
+        .product-card .add-wish{background:#fce4ec;color:#e74c3c;flex:0 0 38px;font-size:16px}
+        .product-card .add-wish:hover{background:#f8bbd0}
+        .empty-state{grid-column:1/-1;text-align:center;padding:50px 20px;color:#999}
+        .pagination{display:flex;justify-content:center;gap:8px;margin-top:30px;flex-wrap:wrap}
+        .pagination button{padding:8px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:13px}
+        .pagination button:hover,.pagination button.active{background:#0a5c36;color:#fff;border-color:#0a5c36}
+        .info-banner{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-radius:10px;padding:18px 22px;margin-bottom:25px;display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+        .info-banner .ib-icon{font-size:28px}
+        .info-banner .ib-text{font-size:13px;color:#333;line-height:1.5;flex:1}
+        .info-banner .ib-text strong{color:#0a5c36}
+        footer{background:#0a5c36;color:#fff;padding:30px 0 15px;margin-top:40px}
+        footer .container{max-width:1200px;margin:0 auto;padding:0 15px}
+        .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px;margin-bottom:20px}
+        footer h4{font-size:16px;margin-bottom:12px;color:#81c784}
+        footer ul{list-style:none}
+        footer ul li{margin-bottom:6px}
+        footer ul li a{color:#ccc;text-decoration:none;font-size:13px}
+        footer ul li a:hover{color:#fff}
+        .footer-bottom{text-align:center;padding-top:15px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;color:#aaa}
+        @media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(max-width:768px){
+            .mobile-menu-btn{display:block}
+            nav ul{display:none;flex-direction:column;width:100%}
+            nav ul.show{display:flex}
+            .products-grid{grid-template-columns:repeat(2,1fr)}
+            .cat-controls{flex-direction:column}
+            .cat-controls select{width:100%}
+        }
+        @media(max-width:480px){
+            .header .container{flex-direction:column;text-align:center}
+            .header-icons{justify-content:center}
+            .products-grid{grid-template-columns:1fr}
+            .cat-header{flex-direction:column;text-align:center}
+            .info-banner{flex-direction:column;text-align:center}
+        }
+    </style>
+</head>
+<body>
+  <div class="page-header">
+    <h1>🧴 Personal Care & Hygiene</h1>
+    <p>Health, hygiene, and wellness products for your daily routine</p>
+</div>
+    <div class="top-bar">
+        <div class="container">
+            <span>📞 +256 700 123 456 | ✉️ info@medicalassist.ug</span>
+            <div><a href="signin.html">Sign In</a></div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/w3cert.gif" alt="MedicalAssist" onerror="this.parentElement.innerHTML='<span style=font-size:28px>🏥</span>'">
+                <div>
+                    <span>MedicalAssist</span>
+                    <small>Your Health, Our Priority</small>
+                </div>
+            </a>
+            <div class="header-icons">
+                <a href="cart.html">🛒 <span class="cart-count" id="cartCount">0</span></a>
+                <a href="my-account.html">👤 My Account</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="online-pharmacy.html">Pharmacy</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="doctor-consultation.html">Doctors</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>⚖️ Weight Loss Products</h1>
+        <p>Safe, effective weight management solutions — from fat burners to meal replacements</p>
+    </div>
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> / <a href="categories.html">Categories</a> / <span>Weight Loss</span>
+        </div>
+    </div>
+
+    <section class="cat-section">
+        <div class="cat-container">
+            <div class="cat-header">
+                <div class="ch-icon">⚖️</div>
+                <div class="ch-text">
+                    <h2>Your Weight Loss Journey Starts Here</h2>
+                    <p>Whether you're looking to shed a few kilos or embark on a complete transformation, we carry clinically-proven supplements, fat burners, appetite suppressants, and meal replacements. All products are sourced from reputable brands and NDA-approved suppliers. Combine with a healthy diet and exercise for best results.</p>
+                </div>
+            </div>
+
+            <div class="info-banner">
+                <div class="ib-icon">💡</div>
+                <div class="ib-text"><strong>Healthy Weight Loss Tip:</strong> Aim for 0.5–1 kg per week. Sustainable weight loss comes from a balanced diet, regular exercise, adequate sleep, and the right supplements. <a href="doctor-consultation.html" style="color:#0a5c36;font-weight:600;">Consult a doctor</a> before starting any weight loss program.</div>
+            </div>
+
+            <div class="cat-controls">
+                <input type="text" id="prodSearch" placeholder="Search weight loss products..." onkeyup="renderProducts()">
+                <select id="sortBy" onchange="renderProducts()">
+                    <option value="name">Sort: Name A-Z</option>
+                    <option value="price-low">Sort: Price Low-High</option>
+                    <option value="price-high">Sort: Price High-Low</option>
+                    <option value="popular">Sort: Most Popular</option>
+                </select>
+                <select id="catFilter" onchange="renderProducts()">
+                    <option value="all">All Categories</option>
+                    <option value="fat-burner">Fat Burners</option>
+                    <option value="appetite">Appetite Suppressants</option>
+                    <option value="tea">Slimming Teas</option>
+                    <option value="detox">Detox & Cleanse</option>
+                    <option value="meal">Meal Replacements</option>
+                    <option value="natural">Natural Herbal</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+            
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>MedicalAssist</h4><p style="font-size:13px;color:#ccc;line-height:1.6;">Your trusted healthcare partner in Uganda.</p></div>
+                <div><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="faq.html">FAQ</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul></div>
+                <div><h4>Weight Loss</h4><ul><li><a href="weight-loss.html">All Products</a></li><li><a href="vitamins.html">Vitamins</a></li><li><a href="personal-care.html">Personal Care</a></li><li><a href="subscriptions.html">Subscriptions</a></li></ul></div>
+                <div><h4>Contact</h4><ul><li>📞 +256 700 123 456</li><li>✉️ info@medicalassist.ug</li><li>📍 Kampala, Uganda</li></ul></div>
+            </div>
+            <div class="footer-bottom">© 2026 MedicalAssist. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        const allProducts = [
+    // Hand Hygiene
+    {name:'Hand Sanitizer Gel 500ml',cat:'hand',desc:'70% alcohol, kills 99.9% germs, moisturizing',price:12000,oldPrice:0,rating:4.4,popular:95,badge:'Essential',img:'sanitizer-500.jpg'},
+    {name:'Hand Sanitizer Pocket 50ml',cat:'hand',desc:'Portable gel sanitizer, keychain friendly',price:3500,oldPrice:0,rating:4.2,popular:88,badge:'',img:'sanitizer-pocket.jpg'},
+    {name:'Antibacterial Soap Liquid 250ml',cat:'hand',desc:'Antibacterial hand wash, gentle on skin',price:8000,oldPrice:0,rating:4.3,popular:75,badge:'',img:'antibacterial-soap.jpg'},
+    {name:'Disposable Gloves Latex 100 pcs',cat:'hand',desc:'Powder-free, examination grade, size M',price:20000,oldPrice:25000,rating:4.1,popular:65,badge:'',img:'gloves-latex.jpg'},
+    {name:'Disposable Gloves Nitrile 50 pcs',cat:'hand',desc:'Latex-free, stronger, medical grade',price:25000,oldPrice:0,rating:4.3,popular:55,badge:'',img:'gloves-nitrile.jpg'},
+
+    // Face Protection
+    {name:'Face Masks 3-ply 50 pcs',cat:'face',desc:'Surgical quality, breathable, ear loops',price:25000,oldPrice:35000,rating:4.5,popular:110,badge:'Bestseller',img:'masks-50.jpg'},
+    {name:'Face Masks KN95 20 pcs',cat:'face',desc:'5-layer filtration, snug fit, individually wrapped',price:30000,oldPrice:0,rating:4.4,popular:88,badge:'',img:'kn95-20.jpg'},
+    {name:'Face Masks Kids 30 pcs',cat:'face',desc:'3-ply, smaller size for children 4-12 years',price:20000,oldPrice:0,rating:4.2,popular:60,badge:'',img:'masks-kids.jpg'},
+    {name:'Face Shield Full Coverage',cat:'face',desc:'Anti-fog, adjustable headband, reusable',price:15000,oldPrice:0,rating:4.0,popular:45,badge:'',img:'face-shield.jpg'},
+
+    // Skin Care
+    {name:'Sunscreen SPF 50+ 100ml',cat:'skin',desc:'Broad spectrum UVA/UVB, water resistant',price:22000,oldPrice:0,rating:4.5,popular:85,badge:'',img:'sunscreen-spf50.jpg'},
+    {name:'Lip Balm Medicated 5g',cat:'skin',desc:'SPF 15, vitamin E, dry lip relief',price:5000,oldPrice:0,rating:4.3,popular:92,badge:'',img:'lip-balm.jpg'},
+    {name:'Hand Cream Moisturizer 100ml',cat:'skin',desc:'Shea butter & aloe, dry skin repair',price:15000,oldPrice:0,rating:4.2,popular:72,badge:'',img:'hand-cream.jpg'},
+        let currentPage = 1;
+        const perPage = 12;
+
+        function renderProducts() {
+            const search = document.getElementById('prodSearch').value.toLowerCase();
+            const catF = document.getElementById('catFilter').value;
+            const sort = document.getElementById('sortBy').value;
+
+            let filtered = allProducts.filter(p => {
+                if (!p.name.toLowerCase().includes(search) && !p.desc.toLowerCase().includes(search)) return false;
+                if (catF !== 'all' && p.cat !== catF) return false;
+                return true;
+            });
+
+            if (sort === 'price-low') filtered.sort((a,b) => a.price - b.price);
+            else if (sort === 'price-high') filtered.sort((a,b) => b.price - a.price);
+            else if (sort === 'popular') filtered.sort((a,b) => b.popular - a.popular);
+            else filtered.sort((a,b) => a.name.localeCompare(b.name));
+
+            const totalPages = Math.ceil(filtered.length / perPage);
+            if (currentPage > totalPages) currentPage = 1;
+            const start = (currentPage - 1) * perPage;
+            const pageItems = filtered.slice(start, start + perPage);
+
+            if (pageItems.length === 0) {
+                document.getElementById('productsGrid').innerHTML = '<div class="empty-state"><div style="font-size:50px;margin-bottom:10px;">🔍</div><p>No products found.</p></div>';
+            } else {
+                document.getElementById('productsGrid').innerHTML = pageItems.map(p => {
+                    const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+                    return `<div class="product-card">
+                        ${p.badge ? `<span class="p-badge">${p.badge}</span>` : ''}
+                        ${p.oldPrice > 0 ? `<span class="p-sale">${Math.round((1-p.price/p.oldPrice)*100)}% OFF</span>` : ''}
+                        <img src="images/${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/150?text=${encodeURIComponent(p.name)}'">
+                        <div class="p-name">${p.name}</div>
+                        <div class="p-desc">${p.desc}</div>
+                        <div class="p-rating">${stars} (${p.popular})</div>
+                        <div class="p-price">UGX ${p.price.toLocaleString()}${p.oldPrice ? `<span class="p-old-price">UGX ${p.oldPrice.toLocaleString()}</span>` : ''}</div>
+                        ${p.price >= 50000 ? '<div class="p-free">🚚 Free Delivery</div>' : ''}
+                        <div class="p-actions">
+                            <button class="add-cart" onclick="addToCart('${p.name.replace(/'/g,"\\'")}',${p.price},'${p.img}')">Add to Cart</button>
+                            <button class="add-wish" onclick="addToWishlist('${p.name.replace(/'/g,"\\'")}',${p.price},'${p.img}')">♥</button>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+
+            let pagHtml = '';
+            for (let i = 1; i <= totalPages; i++) {
+                pagHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="currentPage=${i};renderProducts();">${i}</button>`;
+            }
+            document.getElementById('pagination').innerHTML = totalPages > 1 ? pagHtml : '';
+            updateCartCount();
+        }
+
+        function addToCart(name, price, img) {
+            let cart = JSON.parse(localStorage.getItem('medicalCart')) || [];
+            const existing = cart.find(c => c.name === name);
+            if (existing) existing.quantity = (existing.quantity || 1) + 1;
+            else cart.push({name, price, img, quantity: 1});
+            localStorage.setItem('medicalCart', JSON.stringify(cart));
+            alert('✅ "' + name + '" added to cart!');
+            updateCartCount();
+        }
+
+        function addToWishlist(name, price, img) {
+            let wishlist = JSON.parse(localStorage.getItem('medicalWishlist')) || [];
+            if (!wishlist.find(w => w.name === name)) {
+                wishlist.push({name, price, img});
+                localStorage.setItem('medicalWishlist', JSON.stringify(wishlist));
+                alert('❤️ "' + name + '" added to wishlist!');
+            } else alert('Already in your wishlist!');
+        }
+
+        function updateCartCount() {
+            const c = JSON.parse(localStorage.getItem('medicalCart')) || [];
+            const el = document.getElementById('cartCount');
+            if (el) el.textContent = c.reduce((s,i) => s + (i.quantity || 1), 0);
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
