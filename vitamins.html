@@ -138,4 +138,46 @@
             });
             document.getElementById('productsGrid').innerHTML = filtered.map(p => `
                 <div class="product-card">
-                    <img src
+                    <img src <img src="images/${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/150?text=${encodeURIComponent(p.name)}'">
+                    <div class="p-name">${p.name}</div>
+                    <div class="p-desc">${p.desc}</div>
+                    <div class="p-price">UGX ${p.price.toLocaleString()}</div>
+                    <div class="p-actions">
+                        <button class="add-cart" onclick="addToCart('${p.name}',${p.price},'${p.img}')">Add to Cart</button>
+                        <button class="add-wish" onclick="addToWishlist('${p.name}',${p.price},'${p.img}')">♥</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function addToCart(name, price, img) {
+            let cart = JSON.parse(localStorage.getItem('medicalCart')) || [];
+            const existing = cart.find(c => c.name === name);
+            if (existing) existing.quantity = (existing.quantity || 1) + 1;
+            else cart.push({name, price, img, quantity: 1});
+            localStorage.setItem('medicalCart', JSON.stringify(cart));
+            alert('✅ Added to cart!');
+            updateCartCount();
+        }
+        
+        function addToWishlist(name, price, img) {
+            let wishlist = JSON.parse(localStorage.getItem('medicalWishlist')) || [];
+            if (!wishlist.find(w => w.name === name)) {
+                wishlist.push({name, price, img});
+                localStorage.setItem('medicalWishlist', JSON.stringify(wishlist));
+                alert('❤️ Added to wishlist!');
+            } else {
+                alert('Already in wishlist!');
+            }
+        }
+        
+        function updateCartCount() {
+            const c = JSON.parse(localStorage.getItem('medicalCart')) || [];
+            const el = document.getElementById('cartCount');
+            if (el) el.textContent = c.reduce((s,i) => s + (i.quantity||1), 0);
+        }
+        
+        renderProducts();
+    </script>
+</body>
+</html>
