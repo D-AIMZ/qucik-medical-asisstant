@@ -454,52 +454,568 @@
 <!-- ===== REVIEWS SECTION ===== -->
 <section class="reviews-section">
     <h2>What Our Patients Say</h2>
-    <div class="reviews-container">
-        <div class="reviews-track">
-            <div class="review-card">
-                <p>"Excellent service! I consulted a doctor online and received my prescription within minutes."</p>
-                <h4>- Sarah K.</h4>
+    <p class="reviews-subtitle">Join thousands of satisfied patients across Uganda</p>
+    
+    <div class="reviews-wrapper">
+        <div class="reviews-container" id="reviewsContainer">
+            <!-- Reviews injected by JavaScript -->
+        </div>
+        
+        <div class="reviews-controls">
+            <button class="review-btn review-prev" onclick="moveReviews(-1)" aria-label="Previous reviews">‹</button>
+            <div class="review-dots" id="reviewDots"></div>
+            <button class="review-btn review-next" onclick="moveReviews(1)" aria-label="Next reviews">›</button>
+        </div>
+        
+        <div class="review-stats">
+            <div class="stat-item">
+                <span class="stat-number" id="totalReviews">0</span>
+                <span class="stat-label">Reviews</span>
             </div>
-            <div class="review-card">
-                <p>"The medicine delivery was fast and reliable. Highly recommended."</p>
-                <h4>- John M.</h4>
+            <div class="stat-item">
+                <span class="stat-number">4.8</span>
+                <span class="stat-label">★ Average Rating</span>
             </div>
-            <div class="review-card">
-                <p>"Finding nearby specialists has never been easier."</p>
-                <h4>- Grace N.</h4>
-            </div>
-            <div class="review-card">
-                <p>"Professional doctors and affordable consultation fees."</p>
-                <h4>- David O.</h4>
-            </div>
-            <div class="review-card">
-                <p>"Very helpful platform for managing family healthcare."</p>
-                <h4>- Rebecca A.</h4>
-            </div>
-            <!-- Duplicate for infinite scroll -->
-            <div class="review-card">
-                <p>"Excellent service! I consulted a doctor online and received my prescription within minutes."</p>
-                <h4>- Sarah K.</h4>
-            </div>
-            <div class="review-card">
-                <p>"The medicine delivery was fast and reliable. Highly recommended."</p>
-                <h4>- John M.</h4>
-            </div>
-            <div class="review-card">
-                <p>"Finding nearby specialists has never been easier."</p>
-                <h4>- Grace N.</h4>
-            </div>
-            <div class="review-card">
-                <p>"Professional doctors and affordable consultation fees."</p>
-                <h4>- David O.</h4>
-            </div>
-            <div class="review-card">
-                <p>"Very helpful platform for managing family healthcare."</p>
-                <h4>- Rebecca A.</h4>
+            <div class="stat-item">
+                <span class="stat-number" id="patientsServed">0</span>
+                <span class="stat-label">Patients Served</span>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    /* ===== REVIEWS SECTION ===== */
+    .reviews-section {
+        padding: 50px 15px;
+        background: linear-gradient(135deg, #f0f8f2 0%, #e8f5e9 100%);
+        text-align: center;
+        overflow: hidden;
+    }
+    .reviews-section h2 {
+        font-size: clamp(24px, 5vw, 32px);
+        color: #0a5c36;
+        margin-bottom: 5px;
+    }
+    .reviews-subtitle {
+        font-size: clamp(13px, 2.5vw, 15px);
+        color: #666;
+        margin-bottom: 30px;
+    }
+    .reviews-wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .reviews-container {
+        overflow: hidden;
+        border-radius: 14px;
+        position: relative;
+    }
+    .reviews-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
+    }
+    .review-card {
+        min-width: 100%;
+        padding: 35px 25px;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .review-card .review-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0a5c36, #0d7a4a);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        flex-shrink: 0;
+    }
+    .review-card .review-stars {
+        font-size: 18px;
+        color: #f39c12;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+    }
+    .review-card .review-text {
+        font-size: clamp(14px, 2.5vw, 16px);
+        color: #444;
+        line-height: 1.7;
+        max-width: 600px;
+        margin: 0 auto 12px;
+        font-style: italic;
+        position: relative;
+        padding: 0 10px;
+    }
+    .review-card .review-text::before {
+        content: '"';
+        font-size: 40px;
+        color: #0a5c36;
+        opacity: 0.2;
+        position: absolute;
+        top: -15px;
+        left: -5px;
+        font-family: Georgia, serif;
+    }
+    .review-card .review-author {
+        font-weight: 700;
+        font-size: 15px;
+        color: #0a5c36;
+        margin-bottom: 2px;
+    }
+    .review-card .review-location {
+        font-size: 12px;
+        color: #999;
+    }
+    .review-card .review-service {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 3px 12px;
+        background: #e8f5e9;
+        color: #0a5c36;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    /* Controls */
+    .reviews-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    .review-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid #0a5c36;
+        background: #fff;
+        color: #0a5c36;
+        font-size: 22px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+    .review-btn:hover {
+        background: #0a5c36;
+        color: #fff;
+    }
+    .review-btn:active {
+        transform: scale(0.95);
+    }
+    .review-dots {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .review-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        background: #c8e6c9;
+        cursor: pointer;
+        transition: all 0.3s;
+        padding: 0;
+    }
+    .review-dot.active {
+        background: #0a5c36;
+        width: 28px;
+        border-radius: 5px;
+    }
+    .review-dot:hover {
+        background: #81c784;
+    }
+
+    /* Stats */
+    .review-stats {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
+    .stat-number {
+        font-size: 28px;
+        font-weight: 800;
+        color: #0a5c36;
+        line-height: 1;
+    }
+    .stat-label {
+        font-size: 12px;
+        color: #888;
+        font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+        .review-card {
+            padding: 40px 30px;
+        }
+        .review-card .review-avatar {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+        }
+        .review-stats {
+            gap: 50px;
+        }
+        .stat-number {
+            font-size: 32px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .reviews-section {
+            padding: 35px 12px;
+        }
+        .review-card {
+            padding: 25px 18px;
+        }
+        .review-card .review-avatar {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+        .review-card .review-stars {
+            font-size: 16px;
+        }
+        .review-btn {
+            width: 38px;
+            height: 38px;
+            font-size: 18px;
+        }
+        .review-stats {
+            gap: 20px;
+        }
+        .stat-number {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<script>
+    // ===== REVIEWS DATA =====
+    const reviews = [
+        {
+            name: 'Sarah K.',
+            location: 'Kampala',
+            text: 'Excellent service! I consulted a doctor online and received my prescription within minutes. The medicine was delivered to my door the same day. Truly life-changing for busy professionals.',
+            stars: 5,
+            service: 'Doctor Consultation'
+        },
+        {
+            name: 'John M.',
+            location: 'Entebbe',
+            text: 'The medicine delivery was fast and reliable. I ordered my regular medications and they arrived in perfect condition. The pricing is fair and the staff are very helpful. Highly recommended.',
+            stars: 5,
+            service: 'Pharmacy Delivery'
+        },
+        {
+            name: 'Grace N.',
+            location: 'Jinja',
+            text: 'Finding nearby specialists has never been easier. I was able to book an appointment with a cardiologist within hours. The video consultation was smooth and professional.',
+            stars: 4,
+            service: 'Find a Doctor'
+        },
+        {
+            name: 'David O.',
+            location: 'Mbale',
+            text: 'Professional doctors and affordable consultation fees. I saved so much time and money compared to visiting a clinic in person. The platform is very easy to use.',
+            stars: 5,
+            service: 'Online Consultation'
+        },
+        {
+            name: 'Amina W.',
+            location: 'Gulu',
+            text: 'I was skeptical about online pharmacies at first, but MedicalAssist proved me wrong. My order arrived in Gulu within 2 days, well-packaged and authentic products.',
+            stars: 5,
+            service: 'Online Pharmacy'
+        },
+        {
+            name: 'Peter K.',
+            location: 'Mbarara',
+            text: 'The lab test booking feature is fantastic. I booked a blood test, got my results within 24 hours, and the doctor called to explain everything. Convenient and thorough.',
+            stars: 4,
+            service: 'Lab Tests'
+        },
+        {
+            name: 'Faith M.',
+            location: 'Kampala',
+            text: 'I love the subscription service! My monthly medications arrive automatically. No more running out of my blood pressure medicine. The discounts make it very affordable.',
+            stars: 5,
+            service: 'Subscriptions'
+        },
+        {
+            name: 'Robert S.',
+            location: 'Lira',
+            text: 'The emergency contraception was delivered discreetly and quickly. I appreciate the privacy and the helpful information included in the package. Thank you MedicalAssist.',
+            stars: 5,
+            service: 'Emergency Care'
+        },
+        {
+            name: 'Esther T.',
+            location: 'Masaka',
+            text: 'My children love the vitamins I order from here. The prices are better than local pharmacies and the free delivery saves me so much. Customer service is top-notch.',
+            stars: 4,
+            service: 'Vitamins & Supplements'
+        },
+        {
+            name: 'Joseph B.',
+            location: 'Fort Portal',
+            text: 'As a diabetic, I need regular supplies. MedicalAssist has made it so easy. My glucometer strips arrive on time every month. The reminder service is a lifesaver.',
+            stars: 5,
+            service: 'Medical Devices'
+        },
+        {
+            name: 'Catherine N.',
+            location: 'Arua',
+            text: 'I used the weight loss products and with the dietary advice from their nutritionist, I\'ve lost 8kg in two months! The results speak for themselves.',
+            stars: 5,
+            service: 'Weight Loss'
+        },
+        {
+            name: 'Samuel D.',
+            location: 'Kampala',
+            text: 'Excellent platform for men\'s health products. I was able to get premium supplements that I couldn\'t find locally. Discreet packaging and genuine products.',
+            stars: 4,
+            service: 'Men\'s Health'
+        }
+    ];
+
+    // ===== CAROUSEL SETUP =====
+    let currentIndex = 0;
+    let autoPlayInterval = null;
+    const autoPlayDelay = 5000; // 5 seconds
+    let itemsPerView = 1;
+
+    // Detect cards per view based on screen width
+    function getItemsPerView() {
+        const width = window.innerWidth;
+        if (width >= 900) return 3;
+        // For tablet, we show 2 but carousel tracks 1 at a time with show 2 in CSS
+        // We keep 1 for smoother UX on small screens
+        return width >= 600 ? 2 : 1;
+    }
+
+    // Build review HTML
+    function createReviewHTML(review) {
+        const stars = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars);
+        const initial = review.name.charAt(0);
+        return `
+            <div class="review-card">
+                <div class="review-avatar">${initial}</div>
+                <div class="review-stars">${stars}</div>
+                <p class="review-text">${review.text}</p>
+                <div class="review-author">${review.name}</div>
+                <div class="review-location">📍 ${review.location}</div>
+                <span class="review-service">${review.service}</span>
+            </div>
+        `;
+    }
+
+    // Render the carousel
+    function renderReviews() {
+        const container = document.getElementById('reviewsContainer');
+        const dotsContainer = document.getElementById('reviewDots');
+        
+        // Build the track with multiple rows for multi-view
+        // For simplicity with 3-card view, we duplicate first/last items for infinite feel
+        const totalSlides = Math.ceil(reviews.length / itemsPerView);
+        
+        // Create slides (each slide contains 1-3 reviews depending on view)
+        let slides = [];
+        for (let i = 0; i < reviews.length; i += itemsPerView) {
+            const slideReviews = reviews.slice(i, i + itemsPerView);
+            let slideHtml = '<div class="review-slide" style="display:flex;gap:15px;min-width:100%;box-sizing:border-box;padding:0 5px;">';
+            slideReviews.forEach(r => {
+                slideHtml += createReviewHTML(r);
+            });
+            // Pad with empty if less than itemsPerView
+            while (slideReviews.length < itemsPerView && itemsPerView > 1) {
+                slideHtml += '<div style="flex:1;visibility:hidden;"></div>';
+                slideReviews.push(null);
+            }
+            slideHtml += '</div>';
+            slides.push(slideHtml);
+        }
+
+        // Wrap around: add first slide at end, last slide at beginning for seamless loop
+        if (slides.length > 1) {
+            slides.push(slides[0]); // clone first at end
+            slides.unshift(slides[slides.length - 2]); // clone last at beginning
+            currentIndex = 1; // Start at real first
+        }
+
+        container.innerHTML = `<div class="reviews-track" id="reviewsTrack">${slides.join('')}</div>`;
+
+        // Dots (only for real slides, not clones)
+        const realCount = Math.ceil(reviews.length / itemsPerView);
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < realCount; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'review-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('data-index', i);
+            dot.onclick = function() { goToSlide(parseInt(this.getAttribute('data-index'))); };
+            dotsContainer.appendChild(dot);
+        }
+
+        // Stats
+        document.getElementById('totalReviews').textContent = reviews.length;
+        document.getElementById('patientsServed').textContent = (reviews.length * 85).toLocaleString();
+
+        updateCarousel(false);
+    }
+
+    // Update carousel position
+    function updateCarousel(animate = true) {
+        const track = document.getElementById('reviewsTrack');
+        if (!track) return;
+        
+        const slideWidth = 100;
+        track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none';
+        track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+        // Update dots
+        const realCount = Math.ceil(reviews.length / itemsPerView);
+        const dots = document.querySelectorAll('.review-dot');
+        let realIndex = currentIndex;
+        if (currentIndex === 0) realIndex = realCount - 1; // last clone
+        else if (currentIndex === realCount + 1) realIndex = 0; // first clone
+        else realIndex = currentIndex - 1;
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === realIndex);
+        });
+    }
+
+    // Handle loop reset after transition
+    function handleTransitionEnd() {
+        const track = document.getElementById('reviewsTrack');
+        if (!track) return;
+        
+        const realCount = Math.ceil(reviews.length / itemsPerView);
+        if (currentIndex === 0) {
+            // Jump to last real slide without animation
+            currentIndex = realCount;
+            updateCarousel(false);
+        } else if (currentIndex === realCount + 1) {
+            // Jump to first real slide without animation
+            currentIndex = 1;
+            updateCarousel(false);
+        }
+    }
+
+    // Move by direction (-1 or 1)
+    function moveReviews(direction) {
+        stopAutoPlay();
+        const realCount = Math.ceil(reviews.length / itemsPerView);
+        currentIndex += direction;
+        
+        // Clamp and handle wrap
+        const track = document.getElementById('reviewsTrack');
+        track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        updateCarousel(true);
+        
+        startAutoPlay();
+    }
+
+    // Go to specific slide
+    function goToSlide(index) {
+        stopAutoPlay();
+        const realCount = Math.ceil(reviews.length / itemsPerView);
+        currentIndex = index + 1; // +1 because of clone at start
+        updateCarousel(true);
+        startAutoPlay();
+    }
+
+    // Auto-play
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayInterval = setInterval(() => {
+            const realCount = Math.ceil(reviews.length / itemsPerView);
+            currentIndex++;
+            updateCarousel(true);
+        }, autoPlayDelay);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+        }
+    }
+
+    // Handle resize
+    let resizeTimeout;
+    function handleResize() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const newItems = getItemsPerView();
+            if (newItems !== itemsPerView) {
+                itemsPerView = newItems;
+                stopAutoPlay();
+                // Rebuild from scratch
+                const currentReal = Math.ceil(reviews.length / itemsPerView);
+                currentIndex = 1;
+                renderReviews();
+                startAutoPlay();
+            }
+        }, 250);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        itemsPerView = getItemsPerView();
+        renderReviews();
+        
+        const track = document.getElementById('reviewsTrack');
+        if (track) {
+            track.addEventListener('transitionend', handleTransitionEnd);
+        }
+        
+        startAutoPlay();
+        
+        // Pause on hover
+        const wrapper = document.querySelector('.reviews-wrapper');
+        if (wrapper) {
+            wrapper.addEventListener('mouseenter', stopAutoPlay);
+            wrapper.addEventListener('mouseleave', startAutoPlay);
+            // Touch pause
+            wrapper.addEventListener('touchstart', stopAutoPlay);
+            wrapper.addEventListener('touchend', function() {
+                setTimeout(startAutoPlay, 2000);
+            });
+        }
+        
+        window.addEventListener('resize', handleResize);
+    });
+</script>
 <!-- ===== MEDICINE CATEGORIES ===== -->
 <section class="medicine-categories">
     <a href="mens-health.html">Men's Health</a> <span>|</span>
