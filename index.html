@@ -33,10 +33,583 @@
             <option value="pharmacy">Pharmacy</option>
             <option value="medicines">Medicines</option>
         </select>
-        <label for="search-input" class="sr-only">Search MedicalAssist</label>
-        <input id="search-input" type="search" placeholder="Search for doctors, medicines..." class="search-input">
-        <button type="submit" class="search-btn" aria-label="Search">🔍</button>
+        <div class="search-container">
+    <label for="search-input" class="sr-only">Search MedicalAssist</label>
+    <div class="search-wrapper">
+        <input 
+            id="search-input" 
+            type="search" 
+            placeholder="Search for doctors, medicines, lab tests..." 
+            class="search-input"
+            autocomplete="off"
+            oninput="handleSearch(this.value)"
+            onfocus="handleSearch(this.value)"
+            onblur="setTimeout(function(){closeSearch()}, 200)"
+        >
+        <button type="submit" class="search-btn" aria-label="Search" onclick="handleSearch(document.getElementById('search-input').value)">🔍</button>
+        
+        <!-- Live Results Dropdown -->
+        <div class="search-results" id="searchResults">
+            <!-- Categories of results appear here -->
+        </div>
     </div>
+</div>
+
+<style>
+    /* ===== SEARCH CONTAINER ===== */
+    .search-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+        width: 100%;
+    }
+    .search-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        border: 0;
+    }
+    .search-input {
+        width: 100%;
+        padding: 14px 50px 14px 20px;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        font-size: 15px;
+        background: rgba(255,255,255,0.95);
+        color: #333;
+        transition: all 0.3s;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        outline: none;
+    }
+    .search-input:focus {
+        border-color: #0a5c36;
+        box-shadow: 0 4px 25px rgba(10,92,54,0.15);
+        background: #fff;
+    }
+    .search-input::placeholder {
+        color: #aaa;
+        font-size: 14px;
+    }
+    .search-btn {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(135deg, #0a5c36, #0d7a4a);
+        border: none;
+        border-radius: 50px;
+        padding: 10px 18px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: #fff;
+    }
+    .search-btn:hover {
+        background: linear-gradient(135deg, #0d7a4a, #0f8f58);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    /* ===== SEARCH RESULTS DROPDOWN ===== */
+    .search-results {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.15);
+        max-height: 500px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+        padding: 8px 0;
+    }
+    .search-results.open {
+        display: block;
+        animation: slideDown 0.2s ease-out;
+    }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Results Header */
+    .result-category {
+        padding: 10px 16px 6px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #0a5c36;
+        border-bottom: 1px solid #f0f0f0;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .result-category:first-child {
+        margin-top: 0;
+    }
+
+    /* Individual Result Items */
+    .result-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: background 0.15s;
+        text-decoration: none;
+        color: inherit;
+    }
+    .result-item:hover {
+        background: #e8f5e9;
+    }
+    .result-item .ri-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #f0f8f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    .result-item .ri-icon img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        border-radius: 6px;
+    }
+    .result-item .ri-info {
+        flex: 1;
+        min-width: 0;
+    }
+    .result-item .ri-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .result-item .ri-name .highlight {
+        background: #c8e6c9;
+        color: #0a5c36;
+        padding: 0 2px;
+        border-radius: 2px;
+    }
+    .result-item .ri-desc {
+        font-size: 12px;
+        color: #888;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .result-item .ri-price {
+        font-size: 14px;
+        font-weight: 700;
+        color: #0a5c36;
+        white-space: nowrap;
+    }
+    .result-item .ri-badge {
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .badge-doctor { background: #e3f2fd; color: #0d47a1; }
+    .badge-medicine { background: #e8f5e9; color: #0a5c36; }
+    .badge-lab { background: #fff3e0; color: #e65100; }
+    .badge-service { background: #f3e5f5; color: #6a1b9a; }
+
+    /* No Results */
+    .search-no-results {
+        padding: 30px 20px;
+        text-align: center;
+        color: #999;
+    }
+    .search-no-results .snr-icon {
+        font-size: 36px;
+        margin-bottom: 8px;
+    }
+    .search-no-results .snr-text {
+        font-size: 14px;
+    }
+    .search-no-results .snr-suggest {
+        font-size: 12px;
+        color: #bbb;
+        margin-top: 4px;
+    }
+
+    /* Loading State */
+    .search-loading {
+        padding: 20px;
+        text-align: center;
+        color: #999;
+        font-size: 13px;
+    }
+    .search-loading::after {
+        content: '...';
+        animation: dots 1.5s infinite;
+    }
+    @keyframes dots {
+        0%, 20% { content: '.'; }
+        40% { content: '..'; }
+        60%, 100% { content: '...'; }
+    }
+
+    /* Scrollbar styling */
+    .search-results::-webkit-scrollbar {
+        width: 6px;
+    }
+    .search-results::-webkit-scrollbar-track {
+        background: #f5f5f5;
+        border-radius: 0 0 16px 16px;
+    }
+    .search-results::-webkit-scrollbar-thumb {
+        background: #c8e6c9;
+        border-radius: 3px;
+    }
+    .search-results::-webkit-scrollbar-thumb:hover {
+        background: #81c784;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .search-input {
+            padding: 12px 45px 12px 16px;
+            font-size: 14px;
+        }
+        .search-btn {
+            padding: 8px 14px;
+            font-size: 14px;
+        }
+        .search-results {
+            max-height: 400px;
+            border-radius: 12px;
+        }
+        .result-item {
+            padding: 8px 14px;
+        }
+        .result-item .ri-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 15px;
+        }
+    }
+    @media (max-width: 480px) {
+        .search-input {
+            padding: 10px 40px 10px 14px;
+            font-size: 13px;
+            border-radius: 30px;
+        }
+        .search-btn {
+            right: 3px;
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        .search-results {
+            max-height: 350px;
+        }
+        .result-item .ri-name {
+            font-size: 13px;
+        }
+    }
+</style>
+
+<script>
+    // ===== COMPLETE SEARCH DATABASE =====
+    // This powers the live search — add/edit items here
+    
+    const searchDatabase = {
+        // DOCTORS (linked to doctor-consultation.html)
+        doctors: [
+            { name: 'Dr. Sarah Namuganza', specialty: 'Cardiology', desc: 'Heart specialist, 15 years experience', link: 'doctor-consultation.html?doctor=1', icon: '❤️', badge: 'Doctor' },
+            { name: 'Dr. James Okello', specialty: 'Dentistry', desc: 'Dental surgery & oral health', link: 'doctor-consultation.html?doctor=2', icon: '🦷', badge: 'Doctor' },
+            { name: 'Dr. Grace Tumusiime', specialty: 'Pediatrics', desc: 'Child health & development', link: 'doctor-consultation.html?doctor=3', icon: '👶', badge: 'Doctor' },
+            { name: 'Dr. Margaret Sekandi', specialty: 'Gynecology', desc: 'Women\'s health & reproductive care', link: 'doctor-consultation.html?doctor=4', icon: '👩‍⚕️', badge: 'Doctor' },
+            { name: 'Dr. Paul Wasswa', specialty: 'Dermatology', desc: 'Skin, hair & nail conditions', link: 'doctor-consultation.html?doctor=5', icon: '🔬', badge: 'Doctor' },
+            { name: 'Dr. Catherine Mwangi', specialty: 'Orthopedics', desc: 'Bone, joint & muscle specialist', link: 'doctor-consultation.html?doctor=6', icon: '🦴', badge: 'Doctor' },
+            { name: 'Dr. Henry Kintu', specialty: 'Ophthalmology', desc: 'Eye care & vision correction', link: 'doctor-consultation.html?doctor=7', icon: '👁️', badge: 'Doctor' },
+            { name: 'Dr. Alice Nalwoga', specialty: 'General Medicine', desc: 'General health & wellness', link: 'doctor-consultation.html?doctor=8', icon: '🩺', badge: 'Doctor' },
+            { name: 'Dr. Robert Ssempijja', specialty: 'Neurology', desc: 'Brain & nervous system specialist', link: 'doctor-consultation.html?doctor=9', icon: '🧠', badge: 'Doctor' },
+            { name: 'Dr. Faith Akello', specialty: 'Psychiatry', desc: 'Mental health & counseling', link: 'doctor-consultation.html?doctor=10', icon: '💚', badge: 'Doctor' },
+            { name: 'Dr. Peter Mugisha', specialty: 'Urology', desc: 'Urinary tract & male reproductive health', link: 'doctor-consultation.html?doctor=11', icon: '🔬', badge: 'Doctor' },
+            { name: 'Dr. Rebecca Nantongo', specialty: 'Nutrition', desc: 'Dietary & nutritional counseling', link: 'doctor-consultation.html?doctor=12', icon: '🥗', badge: 'Doctor' }
+        ],
+
+        // MEDICINES & PRODUCTS (linked to online-pharmacy.html)
+        medicines: [
+            { name: 'Panadol Extra', category: 'Pain Relief', desc: 'Paracetamol 500mg + Caffeine 65mg, 24 tablets', price: 5000, link: 'online-pharmacy.html?product=panadol', icon: '💊', badge: 'Medicine' },
+            { name: 'Panadol Original', category: 'Pain Relief', desc: 'Paracetamol 500mg, 24 tablets', price: 4000, link: 'online-pharmacy.html?product=panadol-original', icon: '💊', badge: 'Medicine' },
+            { name: 'Vitamin C 1000mg', category: 'Vitamins', desc: 'Immune support, 30 tablets', price: 15000, link: 'vitamins.html', icon: '🍊', badge: 'Supplement' },
+            { name: 'Vitamin D3 2000IU', category: 'Vitamins', desc: 'Bone health, 60 capsules', price: 22000, link: 'vitamins.html', icon: '☀️', badge: 'Supplement' },
+            { name: 'Omega-3 Fish Oil', category: 'Vitamins', desc: 'Heart & brain health, 30 softgels', price: 45000, link: 'vitamins.html', icon: '🐟', badge: 'Supplement' },
+            { name: 'Wellman Original', category: 'Men\'s Health', desc: 'Men\'s multivitamin, 30 tablets', price: 48000, link: 'mens-health.html', icon: '💪', badge: 'Supplement' },
+            { name: 'Hydroxycut Hardcore Elite', category: 'Weight Loss', desc: 'Clinical strength fat burner, 110 caps', price: 120000, link: 'weight-loss.html', icon: '⚡', badge: 'Supplement' },
+            { name: 'Garcinia Cambogia', category: 'Weight Loss', desc: 'Appetite suppressant, 60 caps', price: 30000, link: 'weight-loss.html', icon: '🌿', badge: 'Supplement' },
+            { name: 'Microgynon 30', category: 'Birth Control', desc: 'Combined oral contraceptive, 21 tabs', price: 12000, link: 'birth-control-pills.html', icon: '💊', badge: 'Prescription' },
+            { name: 'Postinor-2', category: 'Emergency Contraception', desc: 'Emergency contraceptive, 1 dose', price: 10000, link: 'morning-after-pills.html', icon: '⏰', badge: 'OTC' },
+            { name: 'EllaOne', category: 'Emergency Contraception', desc: '120-hour emergency pill, 1 tab', price: 35000, link: 'morning-after-pills.html', icon: '⏰', badge: 'OTC' },
+            { name: 'Hand Sanitizer 500ml', category: 'Personal Care', desc: '70% alcohol, kills 99.9% germs', price: 12000, link: 'personal-care.html', icon: '🧴', badge: 'Care' },
+            { name: 'Face Masks 50 pcs', category: 'Personal Care', desc: '3-ply surgical disposable masks', price: 25000, link: 'personal-care.html', icon: '😷', badge: 'Care' },
+            { name: 'First Aid Kit', category: 'Personal Care', desc: 'Comprehensive 30-piece first aid kit', price: 35000, link: 'personal-care.html', icon: '🩹', badge: 'Care' },
+            { name: 'Blood Pressure Monitor', category: 'Medical Devices', desc: 'Digital automatic upper arm monitor', price: 75000, link: 'medical-devices.html', icon: '🩺', badge: 'Device' },
+            { name: 'Glucometer Kit', category: 'Medical Devices', desc: 'Blood sugar monitor with test strips', price: 55000, link: 'medical-devices.html', icon: '🩸', badge: 'Device' },
+            { name: 'Pulse Oximeter', category: 'Medical Devices', desc: 'Fingertip SpO2 & pulse monitor', price: 45000, link: 'medical-devices.html', icon: '🫁', badge: 'Device' },
+            { name: 'Nebulizer Machine', category: 'Medical Devices', desc: 'Compressor nebulizer for respiratory relief', price: 120000, link: 'medical-devices.html', icon: '💨', badge: 'Device' },
+            { name: 'Bio Slim Active', category: 'Weight Loss', desc: 'Herbal detox weight loss, 60 caps', price: 45000, link: 'weight-loss.html', icon: '🌱', badge: 'Supplement' },
+            { name: 'Meal Replacement Shake', category: 'Weight Loss', desc: 'Complete nutrition, vanilla, 500g', price: 65000, link: 'weight-loss.html', icon: '🥤', badge: 'Supplement' }
+        ],
+
+        // LAB TESTS (linked to lab-tests.html)
+        labTests: [
+            { name: 'Complete Blood Count (CBC)', category: 'Blood Tests', desc: 'Full blood panel: RBC, WBC, platelets, hemoglobin', price: 25000, link: 'lab-tests.html?test=cbc', icon: '🩸', badge: 'Lab' },
+            { name: 'Malaria Test (RDT)', category: 'Infectious Diseases', desc: 'Rapid diagnostic test for malaria parasites', price: 15000, link: 'lab-tests.html?test=malaria', icon: '🦟', badge: 'Lab' },
+            { name: 'Blood Glucose Test', category: 'Blood Tests', desc: 'Fasting blood sugar measurement', price: 12000, link: 'lab-tests.html?test=glucose', icon: '🍬', badge: 'Lab' },
+            { name: 'Urinalysis', category: 'Urine Tests', desc: 'Comprehensive urine analysis', price: 10000, link: 'lab-tests.html?test=urinalysis', icon: '💧', badge: 'Lab' },
+            { name: 'Chest X-Ray', category: 'Imaging', desc: 'Chest radiograph for lung & heart', price: 50000, link: 'lab-tests.html?test=xray', icon: '🫁', badge: 'Lab' },
+            { name: 'Abdominal Ultrasound', category: 'Imaging', desc: 'Liver, kidneys, spleen & pancreas scan', price: 80000, link: 'lab-tests.html?test=ultrasound', icon: '🖼️', badge: 'Lab' },
+            { name: 'ECG/EKG', category: 'Cardiac', desc: 'Electrocardiogram, heart rhythm assessment', price: 35000, link: 'lab-tests.html?test=ecg', icon: '❤️', badge: 'Lab' },
+            { name: 'Lipid Profile', category: 'Cardiac', desc: 'Cholesterol, HDL, LDL, triglycerides', price: 30000, link: 'lab-tests.html?test=lipid', icon: '🫀', badge: 'Lab' },
+            { name: 'HIV Test (Rapid)', category: 'Infectious Diseases', desc: 'Confidential rapid HIV screening', price: 10000, link: 'lab-tests.html?test=hiv', icon: '🧪', badge: 'Lab' },
+            { name: 'Thyroid Function Test', category: 'Hormone Tests', desc: 'TSH, T3, T4 levels', price: 45000, link: 'lab-tests.html?test=thyroid', icon: '🧬', badge: 'Lab' },
+            { name: 'Pregnancy Test (Urine)', category: 'Urine Tests', desc: 'Urine hCG pregnancy test', price: 8000, link: 'lab-tests.html?test=pregnancy', icon: '🤰', badge: 'Lab' },
+            { name: 'Liver Function Test', category: 'Blood Tests', desc: 'ALT, AST, ALP, bilirubin & proteins', price: 35000, link: 'lab-tests.html?test=liver', icon: '🫁', badge: 'Lab' },
+            { name: 'Kidney Function Test', category: 'Blood Tests', desc: 'Creatinine, BUN, electrolyte panel', price: 30000, link: 'lab-tests.html?test=kidney', icon: '🫘', badge: 'Lab' },
+            { name: 'Typhoid Test (Widal)', category: 'Infectious Diseases', desc: 'Widal test for typhoid fever', price: 20000, link: 'lab-tests.html?test=typhoid', icon: '🦠', badge: 'Lab' },
+            { name: 'Hepatitis B Test', category: 'Infectious Diseases', desc: 'HBsAg screening for Hepatitis B', price: 25000, link: 'lab-tests.html?test=hepb', icon: '🦠', badge: 'Lab' },
+            { name: 'Vitamin D Test', category: 'Hormone Tests', desc: '25-hydroxy Vitamin D measurement', price: 60000, link: 'lab-tests.html?test=vitd', icon: '☀️', badge: 'Lab' },
+            { name: 'PSA Test (Prostate)', category: 'Hormone Tests', desc: 'Prostate-specific antigen screening', price: 50000, link: 'lab-tests.html?test=psa', icon: '🧬', badge: 'Lab' },
+            { name: 'Stool Analysis', category: 'Infectious Diseases', desc: 'Stool microscopy for parasites', price: 12000, link: 'lab-tests.html?test=stool', icon: '💩', badge: 'Lab' },
+            { name: 'COVID-19 Rapid Test', category: 'Infectious Diseases', desc: 'Rapid antigen test for COVID-19', price: 15000, link: 'lab-tests.html?test=covid', icon: '🦠', badge: 'Lab' },
+            { name: 'Uric Acid Test', category: 'Blood Tests', desc: 'Uric acid level for gout screening', price: 15000, link: 'lab-tests.html?test=uric', icon: '🩸', badge: 'Lab' }
+        ],
+
+        // SERVICES & PAGES
+        services: [
+            { name: 'Doctor Consultation', category: 'Services', desc: 'Book online consultation with our doctors', link: 'doctor-consultation.html', icon: '👨‍⚕️', badge: 'Service' },
+            { name: 'Online Pharmacy', category: 'Services', desc: 'Order medicines delivered to your door', link: 'online-pharmacy.html', icon: '💊', badge: 'Service' },
+            { name: 'Lab Tests Booking', category: 'Services', desc: 'Book and manage lab test appointments', link: 'lab-tests.html', icon: '🔬', badge: 'Service' },
+            { name: 'Shop by Categories', category: 'Services', desc: 'Browse health products by category', link: 'categories.html', icon: '📂', badge: 'Service' },
+            { name: 'Subscription Plans', category: 'Services', desc: 'Save money with regular medication delivery', link: 'subscriptions.html', icon: '📦', badge: 'Service' },
+            { name: 'My Account', category: 'Services', desc: 'Manage your profile, orders & appointments', link: 'my-account.html', icon: '👤', badge: 'Service' },
+            { name: 'Wishlist', category: 'Services', desc: 'Your saved favorite products', link: 'wishlist.html', icon: '❤️', badge: 'Service' },
+            { name: 'Shopping Cart', category: 'Services', desc: 'View and checkout your items', link: 'cart.html', icon: '🛒', badge: 'Service' },
+            { name: 'Men\'s Health', category: 'Categories', desc: 'Vitamins, supplements & wellness for men', link: 'mens-health.html', icon: '💪', badge: 'Category' },
+            { name: 'Weight Loss', category: 'Categories', desc: 'Fat burners, teas & meal replacements', link: 'weight-loss.html', icon: '⚖️', badge: 'Category' },
+            { name: 'Vitamins & Supplements', category: 'Categories', desc: 'Daily vitamins for all ages', link: 'vitamins.html', icon: '🧬', badge: 'Category' },
+            { name: 'Personal Care', category: 'Categories', desc: 'Health, hygiene & wellness products', link: 'personal-care.html', icon: '🧴', badge: 'Category' },
+            { name: 'Medical Devices', category: 'Categories', desc: 'Equipment for home health monitoring', link: 'medical-devices.html', icon: '🔧', badge: 'Category' },
+            { name: 'Birth Control Pills', category: 'Categories', desc: 'Oral contraceptives, prescription required', link: 'birth-control-pills.html', icon: '💊', badge: 'Category' },
+            { name: 'Morning After Pills', category: 'Categories', desc: 'Emergency contraception, no prescription needed', link: 'morning-after-pills.html', icon: '⏰', badge: 'Category' },
+            { name: 'Contact Us', category: 'Support', desc: 'Get in touch with our team', link: 'contact.html', icon: '📞', badge: 'Support' },
+            { name: 'About MedicalAssist', category: 'Support', desc: 'Learn about our mission and team', link: 'about.html', icon: '🏥', badge: 'Support' },
+            { name: 'FAQ', category: 'Support', desc: 'Frequently asked questions', link: 'faq.html', icon: '❓', badge: 'Support' }
+        ]
+    };
+
+    // ===== SEARCH ENGINE =====
+    let searchTimeout = null;
+
+    function handleSearch(query) {
+        const resultsEl = document.getElementById('searchResults');
+        
+        // Clear previous timeout
+        if (searchTimeout) {
+            clearTimeout(searchTimeout);
+        }
+
+        query = query.trim();
+
+        // Close if empty
+        if (!query || query.length < 1) {
+            resultsEl.classList.remove('open');
+            return;
+        }
+
+        // Show loading for very short queries
+        if (query.length < 2) {
+            resultsEl.innerHTML = '<div class="search-loading">Keep typing to search doctors, medicines, lab tests</div>';
+            resultsEl.classList.add('open');
+            return;
+        }
+
+        // Debounce the search
+        searchTimeout = setTimeout(() => {
+            performSearch(query, resultsEl);
+        }, 150); // 150ms delay for smooth typing
+    }
+
+    function performSearch(query, resultsEl) {
+        const q = query.toLowerCase();
+        let results = [];
+
+        // Helper function to score and collect results
+        function scoreAndCollect(items, source, category, iconPrefix, maxResults) {
+            const scored = [];
+            items.forEach(item => {
+                const searchableText = (item.name + ' ' + (item.desc || '') + ' ' + (item.specialty || '') + ' ' + (item.category || '')).toLowerCase();
+                
+                // Exact match in name gets highest priority
+                let score = 0;
+                const nameLower = item.name.toLowerCase();
+                
+                if (nameLower === q) score = 100;
+                else if (nameLower.startsWith(q)) score = 90;
+                else if (nameLower.includes(' ' + q)) score = 80;
+                else if (nameLower.includes(q)) score = 60;
+                else if (searchableText.includes(q)) score = 40;
+                else {
+                    // Check partial matches (e.g., "panad" matches "Panadol")
+                    let partialMatch = false;
+                    const words = q.split(' ');
+                    words.forEach(word => {
+                        if (word.length > 1 && nameLower.includes(word)) {
+                            score += 30;
+                            partialMatch = true;
+                        }
+                    });
+                    if (!partialMatch) return;
+                }
+
+                // Boost for price range matches
+                if (item.price) {
+                    const priceNum = parseInt(q.replace(/[^0-9]/g, ''));
+                    if (priceNum && Math.abs(item.price - priceNum) < 2000) {
+                        score += 20;
+                    }
+                }
+
+                // Boost for specialty/category match
+                if (item.specialty && item.specialty.toLowerCase().includes(q)) score += 25;
+                if (item.category && item.category.toLowerCase().includes(q)) score += 20;
+
+                scored.push({ item, score, source, category, iconPrefix });
+            });
+
+            scored.sort((a, b) => b.score - a.score);
+            return scored.slice(0, maxResults || 5);
+        }
+
+        // Search all databases
+        const doctorResults = scoreAndCollect(searchDatabase.doctors, 'doctors', '👨‍⚕️ Doctors', 'doctor', 4);
+        const medicineResults = scoreAndCollect(searchDatabase.medicines, 'medicines', '💊 Medicines & Products', 'medicine', 6);
+        const labResults = scoreAndCollect(searchDatabase.labTests, 'labTests', '🔬 Lab Tests', 'lab', 4);
+        const serviceResults = scoreAndCollect(searchDatabase.services, 'services', '📋 Pages & Services', 'service', 4);
+
+        // Combine all results
+        const allResults = [...doctorResults, ...medicineResults, ...labResults, ...serviceResults];
+        allResults.sort((a, b) => b.score - a.score);
+
+        // Render
+        if (allResults.length === 0) {
+            resultsEl.innerHTML = `
+                <div class="search-no-results">
+                    <div class="snr-icon">🔍</div>
+                    <div class="snr-text">No results found for "<strong>${escapeHtml(query)}</strong>"</div>
+                    <div class="snr-suggest">Try searching for: panadol, doctor, blood test, vitamins, consultation</div>
+                </div>
+            `;
+        } else {
+            let html = '';
+            let currentCategory = '';
+
+            allResults.forEach((r, idx) => {
+                const catLabel = r.category;
+                if (catLabel !== currentCategory) {
+                    currentCategory = catLabel;
+                    html += `<div class="result-category">${catLabel}</div>`;
+                }
+
+                const item = r.item;
+                const highlightedName = highlightMatch(item.name, q);
+                const highlightedDesc = highlightMatch((item.desc || item.specialty || ''), q);
+
+                // Determine icon/price
+                let iconHtml = item.icon ? item.icon : '📦';
+                let priceHtml = '';
+                if (item.price) {
+                    priceHtml = `<span class="ri-price">UGX ${item.price.toLocaleString()}</span>`;
+                }
+
+                // Badge class
+                const badgeClass = item.badge ? `badge-${item.badge.toLowerCase()}` : '';
+
+                html += `
+                    <a href="${item.link}" class="result-item" onclick="closeSearch()">
+                        <div class="ri-icon">${iconHtml}</div>
+                        <div class="ri-info">
+                            <div class="ri-name">${highlightedName}</div>
+                            <div class="ri-desc">${highlightedDesc}</div>
+                        </div>
+                        ${priceHtml}
+                        ${item.badge ? `<span class="ri-badge ${badgeClass}">${item.badge}</span>` : ''}
+                    </a>
+                `;
+            });
+
+            // Show total count
+            const totalCount = allResults.length;
+            html += `<div style="padding:8px 16px;font-size:11px;color:#bbb;text-align:center;border-top:1px solid #f0f0f0;">${totalCount} result${totalCount !== 1 ? 's' : ''} found</div>`;
+
+            resultsEl.innerHTML = html;
+        }
+
+        resultsEl.classList.add('open');
+    }
+
+    // ===== UTILITY FUNCTIONS =====
+
+    // Highlight matching text
+    function highlightMatch(text, query) {
+        if (!text || !query) return text || '';
+        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${escapedQuery})`, 'gi');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    // Escape HTML for safety
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Close search dropdown
+    function closeSearch() {
+        document.getElementById('searchResults').classList.remove('open');
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeSearch();
+            document.getElementById('search-input').blur();
+        }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', function(e) {
+        const container = document.querySelector('.search-wrapper');
+        if (container && !container.contains(e.target)) {
+            closeSearch();
+        }
+    });
+</script>
     <!-- RIGHT: User Actions -->
     <div class="user-section">
         <a href="signin.html" class="user-link">
