@@ -44,19 +44,16 @@
             autocomplete="off"
             oninput="handleSearch(this.value)"
             onfocus="handleSearch(this.value)"
-            onblur="setTimeout(function(){closeSearch()}, 200)"
-        >
+            onblur="setTimeout(function(){closeSearch()}, 200)" >
         <button type="submit" class="search-btn" aria-label="Search" onclick="handleSearch(document.getElementById('search-input').value)">🔍</button>
-        
         <!-- Live Results Dropdown -->
         <div class="search-results" id="searchResults">
             <!-- Categories of results appear here -->
         </div>
     </div>
 </div>
-
 <style>
-    /* ===== SEARCH CONTAINER ===== */
+    /* SEARCH CONTAINER */
     .search-container {
         max-width: 1200px;
         margin: 0 auto;
