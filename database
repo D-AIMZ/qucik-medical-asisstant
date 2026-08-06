@@ -1,0 +1,55 @@
+CREATE DATABASE IF NOT EXISTS medicalassist
+  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE medicalassist;
+
+-- Appointments
+CREATE TABLE IF NOT EXISTS appointments (
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    reference     VARCHAR(40)  NOT NULL UNIQUE,
+    doctor_id     INT          NOT NULL,
+    doctor_name   VARCHAR(120) NOT NULL,
+    patient_name  VARCHAR(120) NOT NULL,
+    patient_email VARCHAR(150) NOT NULL,
+    patient_phone VARCHAR(20)  NOT NULL,
+    specialty     VARCHAR(80)  DEFAULT '',
+    date          DATE         NOT NULL,
+    time_slot     VARCHAR(20)  NOT NULL,
+    amount        DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    currency      VARCHAR(3)   DEFAULT 'UGX',
+    status        ENUM('pending','paid','failed','cancelled','completed')
+                              DEFAULT 'pending',
+    payment_method VARCHAR(30) DEFAULT 'card',
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_doctor (doctor_id),
+    INDEX idx_phone (patient_phone)
+);
+
+-- Payment transactions log
+CREATE TABLE IF NOT EXISTS payments (
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id  INT          NOT NULL,
+    reference       VARCHAR(40)  NOT NULL,
+    gateway         VARCHAR(30)  NOT NULL,       -- momo | flutterwave | paypal
+    gateway_ref     VARCHAR(120) DEFAULT '',
+    amount          DECIMAL(12,2) NOT NULL,
+    currency        VARCHAR(3)   DEFAULT 'UGX',
+    status          ENUM('pending','completed','failed') DEFAULT 'pending',
+    raw_response    TEXT,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                             ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (appointment_id) REFERENCES appointments(id) ON DELETE CASCADE
+);
+
+-- Notification log (for debugging / audit)
+CREATE TABLE IF NOT EXISTS notifications (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id INT NULL,
+    channel     ENUM('sms','email','whatsapp') NOT NULL,
+    to_address  VARCHAR(150) NOT NULL,
+    subject     VARCHAR(255) DEFAULT '',
+    body        TEXT,
+    status      ENUM('queued','sent','failed') DEFAULT 'queued',
+    error_msg   VARCHAR(255) DEFAULT '',
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
